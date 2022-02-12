@@ -20,7 +20,7 @@ Here are some notes to help develop our **QUIZ** app. Fell free to share any inf
 #### Entities
 In user-stories we found **nouns:**  user, quiz, questions, answers (quiz), results.
 It will be created 5 entities as below (grouped quiz and questions), the sixth option result will be calculated.
-!["ERD"](https://github.com/BlakeSartin/Mid-Term-Project/tree/master/planning/img)
+!["ERD"](https://github.com/BlakeSartin/Mid-Term-Project/blob/master/planning/img/ERD.jpg)
 
 1. users
 - id	--PK
