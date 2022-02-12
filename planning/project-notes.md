@@ -34,17 +34,23 @@ It will be created 5 entities as below (grouped quiz and questions), the sixth o
 - owner_id -- FK
 - title
 - description
-- time (time to do the quiz - pending) * I had a bad experience in timed tests. I did a proficiency test and their timer didn't expect asynchronous aspect in audio questions. When youtube was not working yet the timer was running out.
+- time_limit (time to do the quiz - pending) * I had a bad experience in timed tests. I did a proficiency test and their timer didn't expect asynchronous aspect in audio questions. When youtube was not working yet the timer was running out.
+- url_quiz_image
 
 3. questions
 - id --PK
 - question (one or more per quiz)
-- url_questions_picture (optional)
+- url_picture_link (optional)
 - options (one or more for each questions)
-- correct answer (1 or more)
 - quiz_id -- FK
 
-4. tests quiz_answers
+4. alternatives
+- id --PK
+- alternative
+- is_correct (boolean)
+- question_id -- FK
+
+5. tests (quiz_answers)
 - id --PK
 - user_id  -- FK
 - quiz_id  -- FK

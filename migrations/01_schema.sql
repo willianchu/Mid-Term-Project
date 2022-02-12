@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS quizzes CASCADE;
 DROP TABLE IF EXISTS questions CASCADE;
+DROP TABLE IF EXISTS alternatives CASCADE;
 DROP TABLE IF EXISTS tests CASCADE;
 DROP TABLE IF EXISTS answers CASCADE;
 
@@ -17,16 +18,23 @@ CREATE TABLE quizzes (
   description TEXT NOT NULL,
   cut_note INTEGER NOT NULL,
   time_limit INTEGER NOT NULL,
+  url_quiz_image VARCHAR(255) NOT NULL,
   owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE questions (
   id SERIAL PRIMARY KEY NOT NULL,
   question TEXT NOT NULL,
-  url_link TEXT NOT NULL,
+  url_picture_link TEXT NOT NULL,
   options TEXT [] NOT NULL, -- array of strings
-  answer INTEGER NOT NULL,
   quiz_id INTEGER REFERENCES quizzes(id) ON DELETE CASCADE
+);
+
+CREATE TABLE altenatives (
+  id SERIAL PRIMARY KEY NOT NULL,
+  alternative TEXT NOT NULL,
+  is_correct BOOLEAN NOT NULL,
+  question_id INTEGER REFERENCES questions(id) ON DELETE CASCADE
 );
 
 CREATE TABLE tests (
@@ -40,7 +48,7 @@ CREATE TABLE tests (
 CREATE TABLE answers (
   id SERIAL PRIMARY KEY NOT NULL,
   question_id INTEGER NOT NULL,
-  user_answer INTEGER NOT NULL,
+  alternative_id INTEGER NOT NULL,
   test_id INTEGER REFERENCES tests(id) ON DELETE CASCADE
 );
 
