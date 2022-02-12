@@ -20,7 +20,7 @@ Any user can make how many quizes he want and share the link with anyone.
 ###### - As a teacher, I can measure my students performance, because I have info by user, group average performance, who fails or pass the quiz.
 ###### - As a student, I can make many quizes to memorize about some subjects, because I can interchange quizes with my friends.
 
-###### - As a future driver, I can make quizes about ICBC Knowledge Test, because I have a group of friends are at the same situation.
+###### - As a future driver, I can make quizes about ICBC Knowledge Test, because I have a group of friends in the same situation.
 
 ###### - As a starwars fan, I can play/ test and encourage other fans, because the quiz have tematic pictures in every question.
 
@@ -30,9 +30,10 @@ As a *logged-in* user, I can **create** and **check** every quiz that I made.
 I could **delete**/ **update** questions or **delete entire** quiz.
 As a user quiz taker, I could **see** and **answer** the questions, at the final I will be able to know my **results**.
 
-action words: logged, create, check (quiz), delete (piece/whole) , update, see (questions), answer (question), know (results)
-nouns: user, quiz, questions, answers (quiz), results.
+- **action words:** logged, create, check (quiz), delete (piece/whole) , update, see (questions), answer (question), know (results)
+- **nouns:** user, quiz, questions, answers (quiz), results.
 
 ### illustrative figure
-!["illustrative figure"](https://github.com/BlakeSartin/Mid-Term-Project/tree/master/planning/icbc_example.jpg)
-####### this is not the real appearance of the app, but it is a good representation of the main idea app.
+!["illustrative figure"](https://github.com/BlakeSartin/Mid-Term-Project/blob/master/planning/img/icbc_example.jpg)
+
+*this is not the real appearance of the app, but it is a good representation of the main idea app.
