@@ -26,7 +26,6 @@ CREATE TABLE questions (
   id SERIAL PRIMARY KEY NOT NULL,
   question TEXT NOT NULL,
   url_picture_link TEXT NOT NULL,
-  options TEXT [] NOT NULL, -- array of strings
   quiz_id INTEGER REFERENCES quizzes(id) ON DELETE CASCADE
 );
 

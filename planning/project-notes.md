@@ -41,7 +41,6 @@ It will be created 5 entities as below (grouped quiz and questions), the sixth o
 - id --PK
 - question (one or more per quiz)
 - url_picture_link (optional)
-- options (one or more for each questions)
 - quiz_id -- FK
 
 4. alternatives
