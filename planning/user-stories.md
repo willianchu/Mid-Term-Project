@@ -34,5 +34,5 @@ action words: logged, create, check (quiz), delete (piece/whole) , update, see (
 nouns: user, quiz, questions, answers (quiz), results.
 
 ### illustrative figure
-!["illustrative figure"](https://github.com/BlakeSartin/Mid-Term-Project/tree/master/planning/icbc_example.jpg)
+!["illustrative figure"](https://github.com/BlakeSartin/Mid-Term-Project/blob/master/planning/img/icbc_example.jpg)
 ####### this is not the real appearance of the app, but it is a good representation of the main idea app.
