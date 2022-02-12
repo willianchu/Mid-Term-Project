@@ -20,7 +20,7 @@ Any user can make how many quizes he want and share the link with anyone.
 ###### - As a teacher, I can measure my students performance, because I have info by user, group average performance, who fails or pass the quiz.
 ###### - As a student, I can make many quizes to memorize about some subjects, because I can interchange quizes with my friends.
 
-###### - As a future driver, I can make quizes about ICBC Knowledge Test, because I have a group of friends are at the same situation.
+###### - As a future driver, I can make quizes about ICBC Knowledge Test, because I have a group of friends in the same situation.
 
 ###### - As a starwars fan, I can play/ test and encourage other fans, because the quiz have tematic pictures in every question.
 
