@@ -19,7 +19,7 @@ Here are some notes to help develop our **QUIZ** app. Fell free to share any inf
 
 #### Entities
 In user-stories we found **nouns:**  user, quiz, questions, answers (quiz), results.
-It will be created 3 entities as below (grouped quiz and questions), the fifth option result will be calculated.
+It will be created 5 entities as below (grouped quiz and questions), the fifth option result will be calculated.
 
 1. users
 - id	--PK
@@ -29,18 +29,28 @@ It will be created 3 entities as below (grouped quiz and questions), the fifth o
 
 2. quizes
 - id --PK
-- questions (one or more per quiz)
-- url_questions_picture (optional)
-- choices (one or more for each questions)
-- correct anwer (1 or more)
+- questions_id
 - cut_note (to know if passed or not)
 - owner_id -- FK
-- time (time to do the quiz - pending) * I had a bad experience in timed tests. I did a proeficiency test and their timer didn't expect asyncrounous aspect in audio questions.
- 
- 3. quiz_answers
- - user_id  -- FK
- - quiz_id  -- FK
- - answers
+- time (time to do the quiz - pending) * I had a bad experience in timed tests. I did a proeficiency test and their timer didn't expect asyncrounous aspect in audio questions. When youtube was not working yet the timer was running out.
+
+3. questions
+- id --PK
+- questions (one or more per quiz)
+- url_questions_picture (optional)
+- options (one or more for each questions)
+- correct answer (1 or more)
+
+4. tests quiz_answers
+- id --PK
+- user_id  -- FK
+- quiz_id  -- FK
+- answer_id -- FK
+
+5. answers
+- id --PK
+- question_id
+- user_answer
 
 ### notes
 - Quizes (create/update questions, delete quizes)
@@ -62,3 +72,4 @@ It will be created 3 entities as below (grouped quiz and questions), the fifth o
 
 
 # Github strategies
+
