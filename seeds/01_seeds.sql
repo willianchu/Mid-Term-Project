@@ -321,10 +321,29 @@ VALUES
 (44,'Rebels', false),	(44,'Empire', true),	(44,'Republic', false),	(44,'Ewoks', false),	(44,'McDonalds', false),
 (45,'Fighter Pilot', false),	(45,'Bullier', false),	(45,'Nurse', false),	(45,'Protocol droid', false),	(45,'Mechanic', true),
 (46,'when parking your vehicle', false),	(46,'when pulling heavy loads or when going up or down very steep hills.', true),	(46,'when exiting a highway', false),	(46,'when it is raining', false),	(46,'none above', false),
-(47,'stay with your vehicle and raise the hood', false),	(47,'try to do roadside repairs on your vehicle', true),	(47,'turn on hazard lights', false),	(47,'set out flares or warning triangles', false),	(47,'call Batman', false),
+(47,'stay with your vehicle and raise the hood', false),	(47,'try to do roadside repairs on your vehicle', true),	(47,'turn on hazard lights', false),	(47,'set out flares or warning triangles', false),	(47,'call Batman', true),
 (48,'200 metres', false),	(48,'150 metres', true),	(48,'100 metres', false),	(48,'50 metres', false),	(48,'25 metres', false),
 (49,'6 seconds', false),	(49,'2 seconds', false),	(49,'8 seconds', false),	(49,'4 seconds', true),	(49,'1 second', false),
 (50,'at all times', false),	(50,'when it is waiting by a school', false),	(50,'when its red lights are flashing', true),	(50,'when it is carrying children', false),	(50,'when it is stopped', false);
+
+INSERT INTO tests (user_id, quiz_id, date_created, finish_date) VALUES 
+(2, 5, NOW()::timestamp, NOW()::timestamp),
+(2, 6, NOW()::timestamp, NOW()::timestamp),
+(3, 6, NOW()::timestamp, NOW()::timestamp);
+
+INSERT INTO answers (question_id, alternative_id, test_id)
+VALUES
+(41, 202, 1),
+(42, 208, 1),
+(43, 211, 1),
+(44, 217 1),
+(45, 225, 1),
+(46, 227, 1),
+(47, 232, 1),
+(48, 237, 1),
+(49, 244, 1),
+(50, 248, 1);
+
 
 
 
