@@ -29,7 +29,7 @@ CREATE TABLE questions (
   quiz_id INTEGER REFERENCES quizzes(id) ON DELETE CASCADE
 );
 
-CREATE TABLE altenatives (
+CREATE TABLE alternatives (
   id SERIAL PRIMARY KEY NOT NULL,
   alternative TEXT NOT NULL,
   is_correct BOOLEAN NOT NULL,
@@ -38,10 +38,10 @@ CREATE TABLE altenatives (
 
 CREATE TABLE tests (
   id SERIAL PRIMARY KEY NOT NULL,
-  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
-  quiz_id INTEGER REFERENCES quizzes(id) ON DELETE CASCADE
-  date_created TIMESTAMP NOT NULL,
-  finish_date TIMESTAMP NOT NULL
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  quiz_id INTEGER REFERENCES quizzes(id) ON DELETE CASCADE,
+  date_created TIMESTAMP,
+  finish_date TIMESTAMP
 );
 
 CREATE TABLE answers (
