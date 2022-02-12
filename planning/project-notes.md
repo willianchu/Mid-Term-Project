@@ -28,12 +28,12 @@ It will be created 5 entities as below (grouped quiz and questions), the sixth o
 - email
 - -password (uncrypted)
 
-2. quizes
+2. quizzes
 - id --PK
 - questions_id
 - cut_note (to know if passed or not)
 - owner_id -- FK
-- time (time to do the quiz - pending) * I had a bad experience in timed tests. I did a proeficiency test and their timer didn't expect asyncrounous aspect in audio questions. When youtube was not working yet the timer was running out.
+- time (time to do the quiz - pending) * I had a bad experience in timed tests. I did a proficiency test and their timer didn't expect asynchronous aspect in audio questions. When youtube was not working yet the timer was running out.
 
 3. questions
 - id --PK
@@ -54,8 +54,8 @@ It will be created 5 entities as below (grouped quiz and questions), the sixth o
 - user_answer
 
 ### notes
-- Quizes (create/update questions, delete quizes)
-- Quiz_answers (With them we could know what question is more easy, wich is harder.)
+- Quizzes (create/update questions, delete quizzes)
+- Quiz_answers (With them we could know what question is more easy, which is harder.)
 - Could show how many times that user did the same quiz (like in lighthouse)
 - Users that did the quiz could know the percentage that they did.
 - The average of correct answers 
