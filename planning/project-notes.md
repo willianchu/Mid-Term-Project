@@ -73,6 +73,24 @@ It will be created 5 entities as below (grouped quiz and questions), the sixth o
 - The easiest questions (more correct answers)
 - The hard questions (more mistakes)
 
+#### Queries
+
+- 01 search user by email 
+- 02 search user by id
+- 03 search quizzes by owner (user)
+- 04 search questions by quizzes
+- 05 search alternatives by question
+- 06 calculate correct answer for given question
+- 061 total question alternatives
+- 062 total question correct alternatives 
+- 07 calculate correct questions for given quiz
+- 08 calculate average of the test for given quiz
+- 09 search tests by users
+- 10 calculate the easiest question of the quiz
+- 11 calculate the hard question of the quiz
+- 12 calculate a single user result by quiz;
+- 13 search all users results by quiz (order by result)
+
 
 ## Interface
 

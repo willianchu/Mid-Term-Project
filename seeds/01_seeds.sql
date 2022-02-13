@@ -329,7 +329,9 @@ VALUES
 INSERT INTO tests (user_id, quiz_id, date_created, finish_date) VALUES 
 (2, 5, NOW()::timestamp, NOW()::timestamp),
 (2, 6, NOW()::timestamp, NOW()::timestamp),
-(3, 6, NOW()::timestamp, NOW()::timestamp);
+(3, 6, NOW()::timestamp, NOW()::timestamp),
+(4, 6, NOW()::timestamp, NOW()::timestamp),
+(5, 6, NOW()::timestamp, NOW()::timestamp);
 
 INSERT INTO answers (question_id, alternative_id, test_id)
 VALUES
@@ -342,20 +344,23 @@ VALUES
 (47, 232, 2),
 (48, 237, 2),
 (49, 244, 2),
-(50, 248, 2);
-
-INSERT INTO answers (question_id, alternative_id, test_id)
-VALUES
+(50, 248, 2),
 (46, 227, 3),
 (47, 232, 3),
 (48, 237, 3),
 (49, 244, 3),
-(50, 248, 3);
+(50, 248, 3),
+(47, 235, 3);
 
 INSERT INTO answers (question_id, alternative_id, test_id)
-VALUES (47, 235, 3);
-
-
-
-
-
+VALUES
+(46, 228, 4),
+(47, 232, 4),
+(48, 236, 4),
+(49, 244, 4),
+(50, 248, 4),
+(46, 227, 5),
+(47, 233, 5),
+(48, 237, 5),
+(49, 244, 5),
+(50, 248, 5);

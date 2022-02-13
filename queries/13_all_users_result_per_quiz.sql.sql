@@ -15,4 +15,5 @@ INNER JOIN tests ON answers.test_id = tests.id
 INNER JOIN alternatives ON answers.alternative_id = alternatives.id
 INNER JOIN users ON tests.user_id = users.id
 WHERE quiz_id = $1 and alternatives.is_correct = true
-GROUP BY users.name; -- $1 = quiz_id returns the percentage of correct answers 1 = 100%
+GROUP BY users.name
+ORDER BY users_results; -- $1 = quiz_id returns the percentage of correct answers 1 = 100%
