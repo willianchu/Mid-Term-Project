@@ -5,15 +5,18 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
+
 const express = require('express');
+const database = require('../lib/database');
 const router  = express.Router();
 
-module.exports = (db) => {
+module.exports = (db) => { // parameter database
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
+    database.getQuizScore(6)
       .then(data => {
-        const users = data.rows;
-        res.json({ users });
+        const score =  data;
+        console.log("questions",({ score }));
+        res.json({ score });
       })
       .catch(err => {
         res
