@@ -3,20 +3,20 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM answers;`)
+    db.query(`SELECT * FROM tests;`)
       .then((data) => {
-        const answers = data.rows;
-        res.json({ answers });
+        const tests = data.rows;
+        res.json({ tests });
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
   });
   router.get("/:id", (req, res) => {
-    db.query(`SELECT * FROM answers WHERE id= $1;`, [req.params.id])
+    db.query(`SELECT * FROM tests WHERE id = $1;`, [req.params.id])
       .then((data) => {
-        const answer = data.rows[0];
-        res.json({ answer });
+        const test = data.rows[0];
+        res.json({ test });
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -25,7 +25,7 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     console.log(req)
     db.query(
-      `INSERT INTO answers(column1, column2, …)
+      `INSERT INTO tests (column1, column2, …)
     VALUES (value1, value2, …);`
     )
       .then(() => {
@@ -37,11 +37,12 @@ module.exports = (db) => {
   });
   router.put("/:id", (req, res) => {
     db.query(
-      `UPDATE answers(column1, column2, …)
+      `UPDATE tests (column1, column2, …)
     VALUES (value1, value2, …)WHERE id = $1;`, [req.params.id]
     )
-      .then(() => {
-        res.json({ data: "Data updated!" });
+      .then((data) => {
+        res.json({test:data.rows[0]});
+        //come back to this
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -49,7 +50,7 @@ module.exports = (db) => {
   });
   router.delete("/:id", (req, res) => {
     db.query(
-      `DELETE FROM answers WHERE  id = $1;`, [req.params.id]
+      `DELETE FROM tests WHERE id = $1;`, [req.params.id]
     )
       .then(() => {
         res.json({ data: "Data deleted!" });
@@ -58,5 +59,18 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  return router
+  // router.get("/:id/result", (req, res) => {
+  //   db.query(`SELECT *, ARRAY_AGG(SELECT * FROM answers WHERE answers.test_id = $1) as answers FROM tests WHERE id = $1`, [req.params.id])
+  //     .then((data) => {
+  //       const test = data.rows;
+  //       console.log("test",test)
+  //       res.json({ test });
+  //     })
+  //     .catch((err) => {
+  //       res.status(500).json({ error: err.message });
+  //     });
+  // });
+
+  return router;
 };
+

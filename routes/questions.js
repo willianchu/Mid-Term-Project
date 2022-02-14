@@ -12,11 +12,11 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  router.get("/:questionsID", (req, res) => {
-    db.query(`SELECT * FROM questions WHERE questionsID= $1;`, [req.params.questionsID])
+  router.get("/:id", (req, res) => {
+    db.query(`SELECT * FROM questions WHERE id= $1;`, [req.params.id])
       .then((data) => {
-        const id = data.rows[0];
-        res.json({ id });
+        const question = data.rows[0];
+        res.json({ question });
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -35,10 +35,10 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  router.put("/:questionsID", (req, res) => {
+  router.put("/:id", (req, res) => {
     db.query(
       `UPDATE questions(column1, column2, …)
-    VALUES (value1, value2, …)WHERE questionsID = $1;`, [req.params.questionsID]
+    VALUES (value1, value2, …)WHERE id = $1;`, [req.params.id]
     )
       .then(() => {
         res.json({ data: "Data updated!" });
@@ -47,9 +47,9 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  router.delete("/:questionsID", (req, res) => {
+  router.delete("/:id", (req, res) => {
     db.query(
-      `DELETE FROM questions WHERE  questionsID = $1;`, [req.params.questionsID]
+      `DELETE FROM questions WHERE  id = $1;`, [req.params.id]
     )
       .then(() => {
         res.json({ data: "Data deleted!" });
