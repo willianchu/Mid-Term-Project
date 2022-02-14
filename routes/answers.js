@@ -25,7 +25,7 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     console.log(req)
     db.query(
-      `INSERT INTO answers(column1, column2, …)
+      `INSERT INTO answers(id, question_id, alternative_id, test_id)
     VALUES (value1, value2, …);`
     )
       .then(() => {
@@ -37,7 +37,7 @@ module.exports = (db) => {
   });
   router.put("/:id", (req, res) => {
     db.query(
-      `UPDATE answers(column1, column2, …)
+      `UPDATE answers(id, question_id, alternative_id, test_id)
     VALUES (value1, value2, …)WHERE id = $1;`, [req.params.id]
     )
       .then(() => {
