@@ -1,11 +1,12 @@
 const express = require("express");
+const database = require('../lib/database');
 const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM answers;`)
+    database.getAllAlternatives()
       .then((data) => {
-        const answers = data.rows;
+        const answers = data;
         res.json({ answers });
       })
       .catch((err) => {
@@ -13,9 +14,14 @@ module.exports = (db) => {
       });
   });
   router.get("/:answersID", (req, res) => {
-    db.query(`SELECT * FROM answers WHERE answersID= $1;`, [req.params.answersID])
+
+    // get one answer by id ? use function below
+    //database.getAlternativesByAlternativeId(req.params.answersID)
+    
+    // getAlternativesByQuestionId() group answers by question id
+    database.getAlternativesByQuestionId(req.params.answersID)
       .then((data) => {
-        const id = data.rows[0];
+        const id = data;
         res.json({ id });
       })
       .catch((err) => {
@@ -23,11 +29,8 @@ module.exports = (db) => {
       });
   });
   router.post("/", (req, res) => {
-    console.log(req)
-    db.query(
-      `INSERT INTO answers(column1, column2, …)
-    VALUES (value1, value2, …);`
-    )
+    console.log(req);
+    database.insertAlternative(req.body) // object with all the data
       .then(() => {
         res.json({ data: "Data created!" });
       })
@@ -36,10 +39,7 @@ module.exports = (db) => {
       });
   });
   router.put("/:answersID", (req, res) => {
-    db.query(
-      `UPDATE answers(column1, column2, …)
-    VALUES (value1, value2, …)WHERE answersID = $1;`, [req.params.answersID]
-    )
+    database.updateAlternative(req.params.answersID)
       .then(() => {
         res.json({ data: "Data updated!" });
       })
@@ -48,9 +48,7 @@ module.exports = (db) => {
       });
   });
   router.delete("/:answersID", (req, res) => {
-    db.query(
-      `DELETE FROM answers WHERE  answersID = $1;`, [req.params.answersID]
-    )
+    database.deleteAlternative(req.params.answersID)
       .then(() => {
         res.json({ data: "Data deleted!" });
       })
@@ -58,5 +56,5 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  return router
+  return router;
 };
