@@ -24,11 +24,7 @@ module.exports = (db) => {
       });
   });
   router.post("/", (req, res) => {
-    console.log(req)
-    db.query(
-      `INSERT INTO questions(column1, column2, …)
-    VALUES (value1, value2, …);`
-    )
+    database.insertQuestion(req.body)
       .then(() => {
         res.json({ data: "Data created!" });
       })
@@ -37,10 +33,7 @@ module.exports = (db) => {
       });
   });
   router.put("/:questionsID", (req, res) => {
-    db.query(
-      `UPDATE questions(column1, column2, …)
-    VALUES (value1, value2, …)WHERE questionsID = $1;`, [req.params.questionsID]
-    )
+    database.updateQuestion(req.params) //goes everything in the params
       .then(() => {
         res.json({ data: "Data updated!" });
       })
@@ -59,5 +52,5 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  return router
+  return router;
 };

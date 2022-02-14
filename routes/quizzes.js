@@ -26,7 +26,7 @@ module.exports = (db) => {
   });
   router.post("/", (req, res) => {
     console.log(req.body);
-    database.addNewQuiz(req.body)
+    database.addQuiz(req.body)
       .then(() => {
         res.json({ data: "Data created!" });
       })
