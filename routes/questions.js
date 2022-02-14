@@ -1,11 +1,12 @@
 const express = require("express");
+const database = require('../lib/database');
 const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM questions;`)
+    database.getAllQuestions()
       .then((data) => {
-        const questions = data.rows;
+        const questions = data;
         res.json({ questions });
       })
       .catch((err) => {
@@ -13,9 +14,9 @@ module.exports = (db) => {
       });
   });
   router.get("/:questionsID", (req, res) => {
-    db.query(`SELECT * FROM questions WHERE questionsID= $1;`, [req.params.questionsID])
+    database.getQuestionsByQuizId(req.params.questionsID)
       .then((data) => {
-        const id = data.rows[0];
+        const id = data;
         res.json({ id });
       })
       .catch((err) => {

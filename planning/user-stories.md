@@ -37,3 +37,10 @@ As a user quiz taker, I could **see** and **answer** the questions, at the final
 !["illustrative figure"](https://github.com/BlakeSartin/Mid-Term-Project/blob/master/planning/img/icbc_example.jpg)
 
 *this is not the real appearance of the app, but it is a good representation of the main idea app.
+
+GET — / | displayHome()
+GET — /users | getUsers()
+GET — /users/:id | getUserById()
+POST — users | createUser()
+PUT — /users/:id | updateUser()
+DELETE — /users/:id | deleteUser()
