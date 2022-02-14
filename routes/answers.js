@@ -3,20 +3,20 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM quizzes;`)
+    db.query(`SELECT * FROM answers;`)
       .then((data) => {
-        const quizzes = data.rows;
-        res.json({ quizzes });
+        const answers = data.rows;
+        res.json({ answers });
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
   });
-  router.get("/:quizID", (req, res) => {
-    db.query(`SELECT * FROM quizzes WHERE quizID = $1;`, [req.params.quizID])
+  router.get("/:answersID", (req, res) => {
+    db.query(`SELECT * FROM answers WHERE answersID= $1;`, [req.params.answersID])
       .then((data) => {
-        const quizID = data.rows[0];
-        res.json({ quizID });
+        const id = data.rows[0];
+        res.json({ id });
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -25,7 +25,7 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     console.log(req)
     db.query(
-      `INSERT INTO quizzes(column1, column2, …)
+      `INSERT INTO answers(column1, column2, …)
     VALUES (value1, value2, …);`
     )
       .then(() => {
@@ -35,10 +35,10 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  router.put("/:quizID", (req, res) => {
+  router.put("/:answersID", (req, res) => {
     db.query(
-      `UPDATE quizzes(column1, column2, …)
-    VALUES (value1, value2, …)WHERE quizID = $1;`, [req.params.quizID]
+      `UPDATE answers(column1, column2, …)
+    VALUES (value1, value2, …)WHERE answersID = $1;`, [req.params.answersID]
     )
       .then(() => {
         res.json({ data: "Data updated!" });
@@ -47,9 +47,9 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  router.delete("/:quizID", (req, res) => {
+  router.delete("/:answersID", (req, res) => {
     db.query(
-      `DELETE FROM +quizzes WHERE quizID = $1;`, [req.params.quizID]
+      `DELETE FROM answers WHERE  answersID = $1;`, [req.params.answersID]
     )
       .then(() => {
         res.json({ data: "Data deleted!" });
@@ -58,7 +58,5 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-
-  return router;
+  return router
 };
-
