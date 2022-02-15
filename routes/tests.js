@@ -1,11 +1,12 @@
 const express = require("express");
+const database = require('../lib/database');
 const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM tests;`)
+    database.getAllTests()
       .then((data) => {
-        const tests = data.rows;
+        const tests = data;
         res.json({ tests });
       })
       .catch((err) => {
@@ -13,9 +14,9 @@ module.exports = (db) => {
       });
   });
   router.get("/:id", (req, res) => {
-    db.query(`SELECT * FROM tests WHERE id = $1;`, [req.params.id])
+    database.getTestsByUser(req.params.id)
       .then((data) => {
-        const test = data.rows[0];
+        const test = data;
         res.json({ test });
       })
       .catch((err) => {
@@ -23,12 +24,7 @@ module.exports = (db) => {
       });
   });
   router.post("/", (req, res) => {
-    const { user_id, quiz_id, date_created, finish_date } = req.body;
-    db.query(
-      `INSERT INTO tests (user_id, quiz_id, date_created, finish_date)
-    VALUES ($1, $2, $3, $4);`,
-      [user_id, quiz_id, date_created, finish_date]
-    )
+    database.insertTest(req.body)
       .then(() => {
         res.json({ data: "Data created!" });
       })
@@ -37,12 +33,7 @@ module.exports = (db) => {
       });
   });
   router.put("/:id", (req, res) => {
-    const { user_id, quiz_id, date_created, finish_date } = req.body;
-    db.query(
-      `UPDATE tests SET user_id = $1, quiz_id = $2, date_created = $3, finish_date = $4
-      WHERE id = $5;`,
-      [user_id, quiz_id, date_created, finish_date, req.params.id]
-    )
+    database.updateTest(req.params.id, req.body)
       .then((data) => {
         res.json({ test: data.rows[0] });
         //come back to this
@@ -52,7 +43,7 @@ module.exports = (db) => {
       });
   });
   router.delete("/:id", (req, res) => {
-    db.query(`DELETE FROM tests WHERE id = $1;`, [req.params.id])
+    database.deleteTest(req.params.id)
       .then(() => {
         res.json({ data: "Data deleted!" });
       })

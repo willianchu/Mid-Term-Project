@@ -33,7 +33,7 @@ module.exports = (db) => {
       });
   });
   router.put("/:id", (req, res) => {
-    database.updateQuestion(req.body) //goes everything in the params
+    database.updateQuestion(req.params.id, req.body)
       .then(() => {
         res.json({ data: "Data updated!" });
       })
