@@ -24,7 +24,14 @@ module.exports = (db) => {
       });
   });
   router.post("/", (req, res) => {
-    console.log(req.body);
+    const {
+      title,
+      description,
+      cut_note,
+      time_limit,
+      url_quiz_image,
+      owner_id,
+    } = req.body;
     database.addQuiz(req.body)
       .then(() => {
         res.json({ data: "Data created!" });
@@ -34,7 +41,7 @@ module.exports = (db) => {
       });
   });
   router.put("/:id", (req, res) => {
-    database.updateQuiz(req.params) //goes everything in the params (id)
+    database.updateQuiz(req.body) //goes everything in the params (id)
       .then(() => {
         res.json({ data: "Data updated!" });
       })
@@ -54,4 +61,3 @@ module.exports = (db) => {
 
   return router;
 };
-

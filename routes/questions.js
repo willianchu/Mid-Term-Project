@@ -24,8 +24,16 @@ module.exports = (db) => {
       });
   });
   router.post("/", (req, res) => {
+<<<<<<< HEAD
     console.log(req);
     database.insertQuestion(req.body)
+=======
+    const {question, url_picture_link, quiz_id } = req.body;
+    db.query(
+      `INSERT INTO questions(question, url_picture_link, quiz_id)
+    VALUES ($1, $2, $3);`, [question, url_picture_link, quiz_id]
+    )
+>>>>>>> 59d3b65ff29bc4f5cd9f5eef230a1f6b21fd03ee
       .then(() => {
         res.json({ data: "Data created!" });
       })
@@ -34,6 +42,7 @@ module.exports = (db) => {
       });
   });
   router.put("/:id", (req, res) => {
+    const {question, url_picture_link, quiz_id} = req.body;
     database.updateQuestion(req.params) //goes everything in the params
       .then(() => {
         res.json({ data: "Data updated!" });
