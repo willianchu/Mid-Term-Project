@@ -23,10 +23,11 @@ module.exports = (db) => {
       });
   });
   router.post("/", (req, res) => {
-    console.log(req)
+    const { user_id, quiz_id, date_created, finish_date } = req.body;
     db.query(
-      `INSERT INTO tests (id, alternative, is_correct, question_id)
-    VALUES (value1, value2, …);`
+      `INSERT INTO tests (user_id, quiz_id, date_created, finish_date)
+    VALUES ($1, $2, $3, $4);`,
+      [user_id, quiz_id, date_created, finish_date]
     )
       .then(() => {
         res.json({ data: "Data created!" });
@@ -36,12 +37,14 @@ module.exports = (db) => {
       });
   });
   router.put("/:id", (req, res) => {
+    const { user_id, quiz_id, date_created, finish_date } = req.body;
     db.query(
-      `UPDATE tests (id, alternative, is_correct, question_id)
-    VALUES (value1, value2, …)WHERE id = $1;`, [req.params.id]
+      `UPDATE tests SET user_id = $1, quiz_id = $2, date_created = $3, finish_date = $4
+      WHERE id = $5;`,
+      [user_id, quiz_id, date_created, finish_date, req.params.id]
     )
       .then((data) => {
-        res.json({test:data.rows[0]});
+        res.json({ test: data.rows[0] });
         //come back to this
       })
       .catch((err) => {
@@ -49,9 +52,7 @@ module.exports = (db) => {
       });
   });
   router.delete("/:id", (req, res) => {
-    db.query(
-      `DELETE FROM tests WHERE id = $1;`, [req.params.id]
-    )
+    db.query(`DELETE FROM tests WHERE id = $1;`, [req.params.id])
       .then(() => {
         res.json({ data: "Data deleted!" });
       })
@@ -73,4 +74,3 @@ module.exports = (db) => {
 
   return router;
 };
-

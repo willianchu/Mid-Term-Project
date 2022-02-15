@@ -23,10 +23,10 @@ module.exports = (db) => {
       });
   });
   router.post("/", (req, res) => {
-    console.log(req)
+    const {question_id, alternative_id, test_id} = req.body
     db.query(
-      `INSERT INTO answers(id, question_id, alternative_id, test_id)
-    VALUES (value1, value2, …);`
+      `INSERT INTO answers(question_id, alternative_id, test_id)
+    VALUES ($1, $2, $3);`, [question_id, alternative_id, test_id]
     )
       .then(() => {
         res.json({ data: "Data created!" });
@@ -36,9 +36,10 @@ module.exports = (db) => {
       });
   });
   router.put("/:id", (req, res) => {
+    const {question_id, alternative_id, test_id} = req.body
     db.query(
-      `UPDATE answers(id, question_id, alternative_id, test_id)
-    VALUES (value1, value2, …)WHERE id = $1;`, [req.params.id]
+      `UPDATE answers SET question_id = $1, alternative_id = $2, test_id = $3
+      WHERE id = $4;`, [question_id, alternative_id, test_id, req.params.id]
     )
       .then(() => {
         res.json({ data: "Data updated!" });

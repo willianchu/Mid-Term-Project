@@ -23,10 +23,10 @@ module.exports = (db) => {
       });
   });
   router.post("/", (req, res) => {
-    console.log(req)
+    const {question, url_picture_link, quiz_id } = req.body;
     db.query(
-      `INSERT INTO questions(id, question, url_picture_link, quiz_id)
-    VALUES (value1, value2, …);`
+      `INSERT INTO questions(question, url_picture_link, quiz_id)
+    VALUES ($1, $2, $3);`, [question, url_picture_link, quiz_id]
     )
       .then(() => {
         res.json({ data: "Data created!" });
@@ -36,9 +36,11 @@ module.exports = (db) => {
       });
   });
   router.put("/:id", (req, res) => {
+    const {question, url_picture_link, quiz_id} = req.body;
     db.query(
-      `UPDATE questions(id, question, url_picture_link, quiz_id)
-    VALUES (value1, value2, …)WHERE id = $1;`, [req.params.id]
+      `UPDATE questions SET question = $1, url_picture_link = $2, quiz_id = $3
+      WHERE id = $4;`,
+      [question, url_picture_link, quiz_id, req.params.id]
     )
       .then(() => {
         res.json({ data: "Data updated!" });
@@ -48,9 +50,7 @@ module.exports = (db) => {
       });
   });
   router.delete("/:id", (req, res) => {
-    db.query(
-      `DELETE FROM questions WHERE  id = $1;`, [req.params.id]
-    )
+    db.query(`DELETE FROM questions WHERE  id = $1;`, [req.params.id])
       .then(() => {
         res.json({ data: "Data deleted!" });
       })
@@ -58,5 +58,5 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  return router
+  return router;
 };
