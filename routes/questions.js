@@ -13,17 +13,18 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  router.get("/:questionsID", (req, res) => {
-    database.getQuestionsByQuizId(req.params.questionsID)
+  router.get("/:id", (req, res) => {
+    database.getQuestionsByQuizId(req.params.id)
       .then((data) => {
-        const id = data;
-        res.json({ id });
+        const question = data;
+        res.json({ question });
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
   });
   router.post("/", (req, res) => {
+    console.log(req);
     database.insertQuestion(req.body)
       .then(() => {
         res.json({ data: "Data created!" });
@@ -32,7 +33,7 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  router.put("/:questionsID", (req, res) => {
+  router.put("/:id", (req, res) => {
     database.updateQuestion(req.params) //goes everything in the params
       .then(() => {
         res.json({ data: "Data updated!" });
@@ -41,10 +42,8 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  router.delete("/:questionsID", (req, res) => {
-    db.query(
-      `DELETE FROM questions WHERE  questionsID = $1;`, [req.params.questionsID]
-    )
+  router.delete("/:id", (req, res) => {
+    database.deleteQuestion(req.params.id)
       .then(() => {
         res.json({ data: "Data deleted!" });
       })

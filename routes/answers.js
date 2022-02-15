@@ -13,16 +13,16 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  router.get("/:answersID", (req, res) => {
+  router.get("/:id", (req, res) => {
 
     // get one answer by id ? use function below
     //database.getAlternativesByAlternativeId(req.params.answersID)
     
     // getAlternativesByQuestionId() group answers by question id
-    database.getAlternativesByQuestionId(req.params.answersID)
+    database.getAlternativesByQuestionId(req.params.id)
       .then((data) => {
-        const id = data;
-        res.json({ id });
+        const answer = data;
+        res.json({ answer });
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -38,8 +38,8 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  router.put("/:answersID", (req, res) => {
-    database.updateAlternative(req.params.answersID)
+  router.put("/:id", (req, res) => {
+    database.updateAlternative(req.params.id)
       .then(() => {
         res.json({ data: "Data updated!" });
       })
@@ -47,8 +47,8 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  router.delete("/:answersID", (req, res) => {
-    database.deleteAlternative(req.params.answersID)
+  router.delete("/:id", (req, res) => {
+    database.deleteAlternative(req.params.id)
       .then(() => {
         res.json({ data: "Data deleted!" });
       })

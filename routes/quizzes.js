@@ -13,12 +13,11 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  router.get("/:quizID", (req, res) => {
-    console.log("quiz request",req.params.quizID);
-    database.getQuizByQuizId(req.params.quizID)
+  router.get("/:id", (req, res) => {
+    database.getQuizByQuizId(req.params.id)
       .then((data) => {
-        const quizID = data;
-        res.json({ quizID });
+        const quiz = data;
+        res.json({ quiz });
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -34,8 +33,8 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  router.put("/:quizID", (req, res) => {
-    database.updateQuiz(req.params)
+  router.put("/:id", (req, res) => {
+    database.updateQuiz(req.params) //goes everything in the params (id)
       .then(() => {
         res.json({ data: "Data updated!" });
       })
@@ -43,8 +42,8 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  router.delete("/:quizID", (req, res) => {
-    database.deleteQuiz(req.params.quizID)
+  router.delete("/:id", (req, res) => {
+    database.deleteQuiz(req.params.id)
       .then(() => {
         res.json({ data: "Data deleted!" });
       })
