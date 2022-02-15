@@ -29,8 +29,8 @@ module.exports = (db) => {
       });
   });
   router.post("/", (req, res) => {
-    console.log(req);
-    database.insertAlternative(req.body) // object with all the data
+    console.log(req.query);
+    database.insertAlternative(req.query) // query or params or body?
       .then(() => {
         res.json({ data: "Data created!" });
       })
@@ -38,8 +38,9 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  router.put("/:id", (req, res) => {
-    database.updateAlternative(req.params.id)
+  router.put("/:id", (req, res) => { // Different PUT
+    console.log("route put answers don't appear this message");
+    database.updateAlternative(req.query) // query or params or body?
       .then(() => {
         res.json({ data: "Data updated!" });
       })
