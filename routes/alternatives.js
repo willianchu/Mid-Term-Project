@@ -4,27 +4,27 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    database.getAllTests()
+    database.getAllAlternatives()
       .then((data) => {
-        const tests = data;
-        res.json({ tests });
+        const alternatives = data;
+        res.json({ alternatives });
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
   });
   router.get("/:id", (req, res) => {
-    database.getTestsByUser(req.params.id)
+    database.getAlternativesByAlternativeId(req.params.id)
       .then((data) => {
-        const test = data;
-        res.json({ test });
+        const alternative = data;
+        res.json({ alternative });
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
   });
   router.post("/", (req, res) => {
-    database.insertTest(req.body)
+    database.insertAlternative(req.body)
       .then(() => {
         res.json({ data: "Data created!" });
       })
@@ -33,9 +33,9 @@ module.exports = (db) => {
       });
   });
   router.put("/:id", (req, res) => {
-    database.updateTest(req.params.id, req.body)
+    database.updateAlternative(req.params.id, req.body)
       .then((data) => {
-        res.json({ test: data.rows[0] });
+        res.json({ alternative: data.rows[0] });
         //come back to this
       })
       .catch((err) => {
@@ -43,7 +43,7 @@ module.exports = (db) => {
       });
   });
   router.delete("/:id", (req, res) => {
-    database.deleteTest(req.params.id)
+    database.deleteAlternative(req.params.id)
       .then(() => {
         res.json({ data: "Data deleted!" });
       })
@@ -51,7 +51,16 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-
+  router.get("/results", (req, res) => {
+    database.getUserScore(userId, quizId)
+      .then((data) => {
+        const results = data;
+        res.json({ results });
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
   router.get("/results/:quizId", (req, res) => {
     database.getQuizScore(req.params.quizId)
       .then((data) => {
@@ -62,7 +71,5 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-
-
-  return router;
+  return router
 };
