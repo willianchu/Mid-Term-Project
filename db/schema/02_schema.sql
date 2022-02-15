@@ -26,14 +26,14 @@ CREATE TABLE questions (
   id SERIAL PRIMARY KEY NOT NULL,
   question TEXT NOT NULL,
   url_picture_link TEXT NOT NULL,
-  quiz_id INTEGER REFERENCES quizzes(id) ON DELETE CASCADE
+  quiz_id INTEGER REFERENCES quizzes(id)
 );
 
 CREATE TABLE alternatives (
   id SERIAL PRIMARY KEY NOT NULL,
   alternative TEXT NOT NULL,
   is_correct BOOLEAN NOT NULL,
-  question_id INTEGER REFERENCES questions(id) ON DELETE CASCADE
+  question_id INTEGER REFERENCES questions(id)
 );
 
 CREATE TABLE tests (

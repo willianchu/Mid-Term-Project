@@ -51,8 +51,12 @@ module.exports = (db) => {
   });
   router.delete("/:id", (req, res) => {
     database.deleteQuiz(req.params.id)
-      .then(() => {
-        res.json({ data: "Data deleted!" });
+      .then((result) => {
+        if  (result === null) {
+          res.status(404).json({ error: "Data not found!" });
+        } else {
+          res.json({ data: "Data deleted!" });
+        }
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
