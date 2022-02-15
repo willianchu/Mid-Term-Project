@@ -29,7 +29,7 @@ module.exports = (db) => {
       });
   });
   router.post("/", (req, res) => {
-    console.log("route",req);
+    console.log("route",req,res);
     database.insertAlternative(req.body)
       .then(() => {
         res.json({ data: "Data created!" });
@@ -39,6 +39,7 @@ module.exports = (db) => {
       });
   });
   router.put("/:id", (req, res) => {
+    console.log("route",req.params.id ,req.body);
     database.updateAlternative(req.params.id ,req.body)
       .then(() => {
         res.json({ data: "Data updated!" });
