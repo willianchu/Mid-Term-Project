@@ -35,7 +35,7 @@ module.exports = (db) => {
   router.put("/:id", (req, res) => {
     database.updateTest(req.params.id, req.body)
       .then((data) => {
-        res.json({ test: data.rows[0] });
+        res.json({ test: data });
         //come back to this
       })
       .catch((err) => {
