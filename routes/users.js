@@ -9,6 +9,7 @@ const express = require("express");
 const database = require("../lib/database");
 const router = express.Router();
 const cookieSession = require('cookie-session')
+const app = express()
 app.use(cookieSession({
  name: 'session',
  keys: ['key1', 'key2']
