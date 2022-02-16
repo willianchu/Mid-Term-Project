@@ -14,7 +14,6 @@ module.exports = (db) => {
       });
   });
   router.get("/:id", (req, res) => {
-    database.getAlternative(req.params.id)
     database.getAlternativesByAlternativeId(req.params.id)
       .then((data) => {
         const alternative = data;
@@ -52,25 +51,6 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  router.get("/results", (req, res) => {
-    database.getUserScore(userId, quizId)
-      .then((data) => {
-        const results = data;
-        res.json({ results });
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
-  });
-  router.get("/results/:quizId", (req, res) => {
-    database.getQuizScore(req.params.quizId)
-      .then((data) => {
-        const totalResults = data;
-        res.json({ totalResults });
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
-  });
+
   return router
 };
