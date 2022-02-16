@@ -5,12 +5,17 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
+const express = require("express");
+const database = require("../lib/database");
+const router = express.Router();
+const cookieSession = require('cookie-session')
+app.use(cookieSession({
+ name: 'session',
+ keys: ['key1', 'key2']
+}))
 
-const express = require('express');
-const database = require('../lib/database');
-const router  = express.Router();
-
-module.exports = (db) => { // parameter database
+module.exports = (db) => {
+  // parameter database
   // router.get("/", (req, res) => {
   //   database.getQuizScore(6)
   //     .then(data => {
@@ -25,8 +30,14 @@ module.exports = (db) => { // parameter database
   //     });
   // });
 
+  app.get("/login/:user_id", (req, res) => {
+    req.session.user_id = req.params.user_id;
+    res.redirect('/');
+  });
+
   router.get("/results/:id", (req, res) => {
-    database.getUserScore(1, req.params.id)
+    database
+      .getUserScore(req.session.user_id, req.params.id)
       .then((data) => {
         const results = data;
         res.json({ results });
