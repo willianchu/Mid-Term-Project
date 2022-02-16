@@ -68,27 +68,20 @@
         <table id="quizzes">
           <tr>
             <th>Quiz Title</th>
-            <th>User ID</th>
-            <th>Date</th>
-            <th>Start Test</th>
-            <th>Share Test</th>
-          <tr>
-            <td>Quiz 1</td>
-            <td>1</td>
-            <td>Sep 12th 2020</td>
-            <td><a href="/">Start Test</a></td>
-            <td><a href="/">Share Test</a></td>
-          </tr>
-          <tr>
-            <td>Quiz 2</td>
-            <td>1</td>
-            <td>Nov 11th 2018</td>
-            <td><a href="/">Start Test</a></td>
-            <td><a href="/">Share Test</a></td>
-          </tr>
+            <th>Owner ID</th>
+            <th>Start Quiz</th>
+            <th>Share Quiz</th>
+          <% for (let quiz of quizzes) { %>
+            <tr>
+              <td><%= quiz['title'] %></td>
+              <td><%= quiz['owner_id'] %></td>
+              <td><a href="/quizzes/<%= quiz['id'] %>">Start Quiz</a></td>
+              <td><a href="/">Share Quiz</a></td>
+            </tr>
+          <% } %>
         </table>
       </div>
-      <button type="button" class="collapsible">Attempts</button>
+      <button type="button" class="collapsible">Results</button>
       <div class="content">
         <table id="attempts">
           <tr>
@@ -98,20 +91,15 @@
             <th>View Result</th>
             <th>Share Result</th>
           </tr>
-          <tr>
-            <td>Quiz 1</td>
-            <td>1</td>
-            <td>Sep 12th 2020</td>
-            <td><a href="/">View Result</a></td>
-            <td><a href="/">Share Result</a></td>
-          </tr>
-          <tr>
-            <td>Quiz 2</td>
-            <td>1</td>
-            <td>Nov 11th 2018</td>
-            <td><a href="/">View Result</a></td>
-            <td><a href="/">Share Result</a></td>
-          </tr>
+          <% for (let test of tests) { %>
+            <tr>
+              <td><%= test['title'] %></td>
+              <td><%= test['user_id'] %></td>
+              <td><%= test['finish_date'] %></td>
+              <td><a href="/tests/<%= test['id'] %>">View Result</a></td>
+              <td><a href="/">Share Result</a></td>
+            </tr>
+          <% } %>
         </table>
       </div>
     </section>

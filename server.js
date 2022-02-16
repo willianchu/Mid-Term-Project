@@ -14,6 +14,7 @@ const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
 db.connect();
+const database = require('./lib/database');
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -62,7 +63,20 @@ app.use("/api/alternatives", alternativesRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  res.render("index");
+  Promise.all([
+    database.getAllQuizzes(),
+    database.getAllTests(),
+  ])
+  .then((data) => {
+    const quizzes = data[0];
+    const tests = data[1];
+    const templateVars = { quizzes, tests };
+    console.log(templateVars);
+    res.render("index", templateVars);
+  })
+  .catch((err) => {
+    res.status(500).json({ error: err.message });
+  });
 });
 
 

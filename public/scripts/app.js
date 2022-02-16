@@ -12,7 +12,6 @@ $(document).ready(function() {
         $(content).slideUp().then (() => content.style.display = "none");
       } else {
         $(content).slideDown().then (() => content.style.display = "flex");;
-
       }
     });
   }
