@@ -1,0 +1,24 @@
+#app-header > nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
+  background-color: coral;
+}
+
+#app-logo {
+  font-family: 'Patua One', cursive;
+  font-size: 2em;
+  padding-left: 2rem;
+  color: seashell;
+  &:link { text-decoration: none; }
+  &:visited { text-decoration: none; }
+  &:hover { text-decoration: none; }
+  &:active { text-decoration: none; }
+}
+
+#user-info {
+  color: seashell;
+  font-weight: 600;
+  padding-right: 2rem;
+}
