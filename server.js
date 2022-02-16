@@ -7,8 +7,12 @@ const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
+<<<<<<< HEAD
 const bodyParser = require("body-parser")
 const cookieSession = require('cookie-session')
+=======
+const bodyParser = require("body-parser");
+>>>>>>> 1ceed72a3e806f582dda6627914b931489c17795
 
 // PG database client/connection setup
 const { Pool } = require("pg");

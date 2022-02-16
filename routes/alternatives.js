@@ -14,6 +14,7 @@ module.exports = (db) => {
       });
   });
   router.get("/:id", (req, res) => {
+    database.getAlternative(req.params.id)
     database.getAlternativesByAlternativeId(req.params.id)
       .then((data) => {
         const alternative = data;

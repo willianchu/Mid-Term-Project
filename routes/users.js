@@ -9,28 +9,17 @@ const express = require("express");
 const database = require("../lib/database");
 const router = express.Router();
 const cookieSession = require('cookie-session')
+<<<<<<< HEAD
 const app = express()
+=======
+const app = express();
+>>>>>>> 1ceed72a3e806f582dda6627914b931489c17795
 app.use(cookieSession({
  name: 'session',
  keys: ['key1', 'key2']
 }))
 
 module.exports = (db) => {
-  // parameter database
-  // router.get("/", (req, res) => {
-  //   database.getQuizScore(6)
-  //     .then(data => {
-  //       const score =  data;
-  //       console.log("questions",({ score }));
-  //       res.json({ score });
-  //     })
-  //     .catch(err => {
-  //       res
-  //         .status(500)
-  //         .json({ error: err.message });
-  //     });
-  // });
-
   app.get("/login/:user_id", (req, res) => {
     req.session.user_id = req.params.user_id;
     res.redirect('/');
