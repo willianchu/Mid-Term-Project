@@ -20,7 +20,8 @@ VALUES (
 'Alejandro Osborne', 'ariaatkinson@outlook.com', 'password');
 
 
-
+INSERT INTO quizzes (title, description, cut_note, time_limit, url_quiz_image, owner_id)
+VALUES
 ('TV Movie Quiz', 'This is a quiz about TV Movie intersting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/____________________________________4900867.png', 5),
 ('Music Quiz', 'This is a quiz about Music intersting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/4816224.png?97', 4),
 ('Food Quiz', 'This is a quiz about Food intersting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/3002580.png?103', 3),

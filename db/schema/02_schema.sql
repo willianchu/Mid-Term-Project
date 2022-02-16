@@ -19,27 +19,27 @@ CREATE TABLE quizzes (
   cut_note INTEGER,
   time_limit INTEGER,
   url_quiz_image VARCHAR(255),
-  owner_id INTEGER REFERENCES users(id)
+  owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE questions (
   id SERIAL PRIMARY KEY NOT NULL,
   question TEXT NOT NULL,
   url_picture_link TEXT NOT NULL,
-  quiz_id INTEGER REFERENCES quizzes(id)
+  quiz_id INTEGER REFERENCES quizzes(id) ON DELETE CASCADE
 );
 
 CREATE TABLE alternatives (
   id SERIAL PRIMARY KEY NOT NULL,
   alternative TEXT NOT NULL,
   is_correct BOOLEAN NOT NULL,
-  question_id INTEGER REFERENCES questions(id)
+  question_id INTEGER REFERENCES questions(id)  ON DELETE CASCADE
 );
 
 CREATE TABLE tests (
   id SERIAL PRIMARY KEY NOT NULL,
-  user_id INTEGER REFERENCES users(id),
-  quiz_id INTEGER REFERENCES quizzes(id),
+  user_id INTEGER REFERENCES users(id)  ON DELETE CASCADE,
+  quiz_id INTEGER REFERENCES quizzes(id)  ON DELETE CASCADE,
   date_created TIMESTAMP,
   finish_date TIMESTAMP
 );
@@ -48,7 +48,7 @@ CREATE TABLE answers (
   id SERIAL PRIMARY KEY NOT NULL,
   question_id INTEGER NOT NULL,
   alternative_id INTEGER NOT NULL,
-  test_id INTEGER REFERENCES tests(id)
+  test_id INTEGER REFERENCES tests(id)  ON DELETE CASCADE
 );
 
 
