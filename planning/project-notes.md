@@ -73,23 +73,49 @@ It will be created 5 entities as below (grouped quiz and questions), the sixth o
 - The easiest questions (more correct answers)
 - The hard questions (more mistakes)
 
-#### Queries
+#### Queries (updated february 15th)
 
-- 01 search user by email 
+- 01 search user by email
+  getUserByEmail() - get a single user by its email
+
 - 02 search user by id
+  getUserById() - get a single user by its user id
+
 - 03 search quizzes by owner (user)
+  getQuizzesByUserId - get all quizzes by user id
+  *3.1 - getAllQuizzes() - get all quizzes
+  *3.2 - getQuizzesByUserId() - get all quizzes by user id
+  *3.3 - insertQuiz() - insert a new quiz
+  *3.4 - updateQuiz() - update a quiz
+  *3.5 - deleteQuiz() - delete a quiz
+
 - 04 search questions by quizzes
-- 05 search alternatives by question
-- 06 calculate correct answer for given question
-- 061 total question alternatives
-- 062 total question correct alternatives 
-- 07 calculate correct questions for given quiz
-- 08 calculate average of the test for given quiz
-- 09 search tests by users
-- 10 calculate the easiest question of the quiz
-- 11 calculate the hard question of the quiz
-- 12 calculate a single user result by quiz;
-- 13 search all users results by quiz (order by result)
+  4.1 - getAllQuestions() - get all questions
+  4.2 - insertQuestion() - insert a new question
+  4.3 - updateQuestion() - update a question
+  4.4 - deleteQuestion() - delete a question
+
+- 05 getAlternativesByQuestionId() - get the alternatives by question id
+  *5.1 - getAllAlternatives() - get all alternatives
+  *5.2 - getAlternativesByAlternativeId() - get all alternatives by alternative id
+  *5.3 - insertAlternative() - insert a new alternative
+  *5.4 - updateAlternative() - update a alternative
+  *5.5 - deleteAlternative() - delete a alternative
+
+- 07 getQuizCorrectAlternatives() - get a complete quiz by quiz id (returns all questions and alternatives) - asked to final results
+
+- 08 calculate average of the test for given quiz - quizAverage() - get the average of the test for given quiz made for all users.
+
+- 09 search tests by users - getTestsByUser()
+  *9.1 - getAllTests() - get all tests
+  *9.2 - insertTest() - insert a new test
+  *9.3 - updateTest() - update a test
+  *9.4 - deleteTest() - delete a test
+
+- 10 getEasyQuestions() - get the easiest questions for a quiz (get a list of questions with more correct answers)
+- 11 getHardQuestions() - get the hard questions for a quiz (get a list of questions that have the most mistakes)
+- 12 getUserScore() - get the user score for a quiz (returns the percentage of correct answers - 0 to 1)
+- 13 getQuizScore() - get the quiz score for a quiz (returns a list of users and their score in percentage)
 
 
 ## Interface

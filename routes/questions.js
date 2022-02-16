@@ -14,8 +14,9 @@ module.exports = (db) => {
       });
   });
   router.get("/:id", (req, res) => {
-    database.getQuestionsByQuizId(req.params.id)
-      .then((data) => {
+    //getQuizCorrectAlternatives(req.params.id) //this version only returns the correct alternatives for each question of the quiz.id
+    database.getQuestionsByQuizId(req.params.id) // it's a quiz id
+      .then((data) => { // retrieves all questions with all alternatives for a quiz
         const question = data;
         res.json({ question });
       })
@@ -33,7 +34,7 @@ module.exports = (db) => {
       });
   });
   router.put("/:id", (req, res) => {
-    database.updateQuestion(req.body) //goes everything in the params
+    database.updateQuestion(req.params.id, req.body)
       .then(() => {
         res.json({ data: "Data updated!" });
       })
