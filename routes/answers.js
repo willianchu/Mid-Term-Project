@@ -29,7 +29,6 @@ module.exports = (db) => {
       });
   });
   router.post("/", (req, res) => {
-    console.log("route",req,res);
     database.insertAlternative(req.body)
       .then(() => {
         res.json({ data: "Data created!" });

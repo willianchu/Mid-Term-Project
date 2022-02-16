@@ -14,8 +14,9 @@ module.exports = (db) => {
       });
   });
   router.get("/:id", (req, res) => {
+    //getQuizCorrectAlternatives(req.params.id) //this version only returns the correct alternatives for each question of the quiz.id
     database.getQuestionsByQuizId(req.params.id) // it's a quiz id
-      .then((data) => { // retrieves all questions with alternatives for a quiz
+      .then((data) => { // retrieves all questions with all alternatives for a quiz
         const question = data;
         res.json({ question });
       })

@@ -15,14 +15,15 @@ This app lets you create quizzes and share them between friends. The creator of 
 
 # Users-stories
 
-Any user can make how many quizes he want and share the link with anyone.
+Any user can make how many quizzes he want and share the link with anyone.
 
 ###### - As a teacher, I can measure my students performance, because I have info by user, group average performance, who fails or pass the quiz.
-###### - As a student, I can make many quizes to memorize about some subjects, because I can interchange quizes with my friends.
 
-###### - As a future driver, I can make quizes about ICBC Knowledge Test, because I have a group of friends in the same situation.
+###### - As a student, I can make many quizzes to memorize about some subjects, because I can interchange quizzes with my friends.
 
-###### - As a starwars fan, I can play/ test and encourage other fans, because the quiz have tematic pictures in every question.
+###### - As a future driver, I can make quizzes about ICBC Knowledge Test, because I have a quiz designed with my weakness points in the test.
+
+###### - As a star wars fan, I can play/ test and encourage other fans, because the quiz have thematic pictures in every question and quiz.
 
 # User experience
 
@@ -40,7 +41,13 @@ As a user quiz taker, I could **see** and **answer** the questions, at the final
 
 GET — / | displayHome()
 GET — /users | getUsers()
-GET — /users/:id | getUserById()
-POST — users | createUser()
+GET — /questions/:id | getQuestionsByQuizId()
+GET — /users/results/:id | getResultsByQuizId()
+POST — quizzes | createQuiz()
+POST — test | createTest()
+POST — answers | addAnswers()
 PUT — /users/:id | updateUser()
-DELETE — /users/:id | deleteUser()
+PUT — /quizzes/:id | updateQuiz()
+PUT — /questions/:id | updateQuestions()
+DELETE — /questions/:id | deleteQuestions()
+DELETE — /quizzes/:id | deleteQuiz()
