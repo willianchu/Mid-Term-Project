@@ -132,6 +132,9 @@ app.post("/quizzes/:id", (req, res) => {
   // res.redirect(`/results/${testId}`)
 });
 
+app.get("/results/:id", (req, res) => {
+  console.log(req);
+});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
