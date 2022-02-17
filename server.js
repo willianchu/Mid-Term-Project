@@ -137,6 +137,7 @@ app.get("/login/:id", (req, res) => {
 });
 
 app.get("/tests/:id", (req, res) => {
+  const loggedInUser = 6;
   database.getTestsByTestId(req.params.id)
     .then((data) => { // retrieve test data
       const test = data;
@@ -144,7 +145,7 @@ app.get("/tests/:id", (req, res) => {
         database.getQuizByQuizId(test.quiz_id),// get quiz data
         database.quizAverage(test.quiz_id), //
         database.getQuizScore(test.quiz_id),// get quiz score of all users
-        database.getUserScore(test.user_id, test.quiz_id) // get user score
+        database.getUserScore(loggedInUser, test.quiz_id) // get user score
       ])
         .then((data) => {
           const quizAverage = data[0];

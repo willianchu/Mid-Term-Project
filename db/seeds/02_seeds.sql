@@ -17,17 +17,17 @@ VALUES (
 INSERT INTO users (
 name, email, password) 
 VALUES (
-'Alejandro Osborne', 'ariaatkinson@outlook.com', 'password');
+'Labber User', 'ariaatkinson@outlook.com', 'password');
 
 
-INSERT INTO quizzes (title, description, cut_note, time_limit, url_quiz_image, owner_id)
+INSERT INTO quizzes (title, description, cut_note, time_limit, url_quiz_image, owner_id, is_unlisted)
 VALUES
-('TV Movie Quiz', 'This is a quiz about TV Movie intersting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/____________________________________4900867.png', 5),
-('Music Quiz', 'This is a quiz about Music intersting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/4816224.png?97', 4),
-('Food Quiz', 'This is a quiz about Food intersting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/3002580.png?103', 3),
-('General Quiz', 'This is a quiz about General intersting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/9528554.png?81', 2),
-('Starwars Quiz', 'This is a quiz about Starwars intersting questions', 80, 600000, 'https://th.bing.com/th/id/OIP.aGLKTgirRYB7xLsSOet5kQHaEK?pid=ImgDet&rs=1', 1),
-('ICBC Quiz', 'This is a quiz about ICBC intersting questions', 90, 600000, 'https://yt3.ggpht.com/-mKidUqtufnY/AAAAAAAAAAI/AAAAAAAAAAA/Zt6m4aW1JWE/s900-c-k-no/photo.jpg', 1);
+('TV Movie Quiz', 'This is a quiz about TV Movie interesting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/____________________________________4900867.png', 5,false),
+('Music Quiz', 'This is a quiz about Music interesting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/4816224.png?97', 4,false),
+('Food Quiz', 'This is a quiz about Food interesting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/3002580.png?103', 3, false),
+('General Quiz', 'This is a quiz about General interesting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/9528554.png?81', 2, false),
+('Starwars Quiz', 'This is a quiz about Starwars interesting questions', 80, 600000, 'https://th.bing.com/th/id/OIP.aGLKTgirRYB7xLsSOet5kQHaEK?pid=ImgDet&rs=1', 1, false),
+('ICBC Quiz', 'This is a quiz about ICBC interesting questions', 90, 600000, 'https://yt3.ggpht.com/-mKidUqtufnY/AAAAAAAAAAI/AAAAAAAAAAA/Zt6m4aW1JWE/s900-c-k-no/photo.jpg', 1);
 
 INSERT INTO questions (question, url_picture_link, quiz_id)
 VALUES
@@ -135,12 +135,13 @@ VALUES
 (49,'6 seconds', false),	(49,'2 seconds', false),	(49,'8 seconds', false),	(49,'4 seconds', true),	(49,'1 second', false),
 (50,'at all times', false),	(50,'when it is waiting by a school', false),	(50,'when its red lights are flashing', true),	(50,'when it is carrying children', false),	(50,'when it is stopped', false);
 
-INSERT INTO tests (user_id, quiz_id, date_created, finish_date) VALUES 
+INSERT INTO tests (user_id, quiz_id, date_created, finish_date) VALUES
 (2, 5, NOW()::timestamp, NOW()::timestamp),
 (2, 6, NOW()::timestamp, NOW()::timestamp),
 (3, 6, NOW()::timestamp, NOW()::timestamp),
 (4, 6, NOW()::timestamp, NOW()::timestamp),
-(5, 6, NOW()::timestamp, NOW()::timestamp);
+(5, 6, NOW()::timestamp, NOW()::timestamp)
+(1, 5, NOW()::timestamp, NOW()::timestamp);
 
 INSERT INTO answers (question_id, alternative_id, test_id)
 VALUES
@@ -169,4 +170,9 @@ VALUES
 (47, 233, 5),
 (48, 237, 5),
 (49, 244, 5),
-(50, 248, 5);
+(50, 248, 5),
+(41, 202, 6),
+(42, 208, 6),
+(43, 212, 6),
+(44, 216, 6),
+(45, 225, 6);

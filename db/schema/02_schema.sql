@@ -19,7 +19,8 @@ CREATE TABLE quizzes (
   cut_note INTEGER,
   time_limit INTEGER,
   url_quiz_image VARCHAR(255),
-  owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+  owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  is_unlisted BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE questions (
