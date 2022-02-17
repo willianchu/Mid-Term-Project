@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Quiz App - startQuiz</title>
+
+  <!-- Meta Information -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name='viewport' content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <!-- External JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- App JS -->
+  <script type="text/javascript" src="/scripts/app.js"></script>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Patua+One&family=Source+Sans+Pro:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
+
+  <!-- App CSS -->
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css">
+  <link rel="stylesheet" href="/styles/main.css" type="text/css">
+  <link rel="stylesheet" href="/styles/header.css" type="text/css">
+
+</head>
+<body>
+  <%- include('partials/_header') %>
+  <main style="margin: 1em;">
+    <section id ="question-table">
+      <button type="button" class="collapsible"><%=quiz[0].title%></button>
+      <div class="quiz-content">
+    <table class="question-1">
+      <thead>
+        <tr>
+          <th scope="col">Question</th>
+          <th scope="col">Alternative 1</th>
+          <th scope="col">Altternative 2</th>
+          <th scope="col">Altternative 3</th>
+          <th scope="col">Altternative 4</th>
+          <th scope="col">Altternative 5</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%=questions[0].question%></td>
+          <td><button class="btn success"><%=questions[0].alternative%></button></td>
+          <td><button class="btn success"><%=questions[1].alternative%></button></td>
+          <td><button class="btn success"><%=questions[2].alternative%></button></td>
+          <td><button class="btn success"><%=questions[3].alternative%></button></td>
+          <td><button class="btn success"><%=questions[4].alternative%></button></td>
+          <td><button type="submit" class="btn btn-primary">Submit</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="question-1">
+      <thead>
+        <tr>
+          <th scope="col">Question</th>
+          <th scope="col">Alternative 1</th>
+          <th scope="col">Altternative 2</th>
+          <th scope="col">Altternative 3</th>
+          <th scope="col">Altternative 4</th>
+          <th scope="col">Altternative 5</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%=questions[5].question%></td>
+          <td><button class="btn success"><%=questions[5].alternative%></button></td>
+          <td><button class="btn success"><%=questions[6].alternative%></button></td>
+          <td><button class="btn success"><%=questions[7].alternative%></button></td>
+          <td><button class="btn success"><%=questions[8].alternative%></button></td>
+          <td><button class="btn success"><%=questions[9].alternative%></button></td>
+          <td><button type="submit" class="btn btn-primary">Submit</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="question-1">
+      <thead>
+        <tr>
+          <th scope="col">Question</th>
+          <th scope="col">Alternative 1</th>
+          <th scope="col">Altternative 2</th>
+          <th scope="col">Altternative 3</th>
+          <th scope="col">Altternative 4</th>
+          <th scope="col">Altternative 5</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%=questions[10].question%></td>
+          <td><button class="btn success"><%=questions[10].alternative%></button></td>
+          <td><button class="btn success"><%=questions[11].alternative%></button></td>
+          <td><button class="btn success"><%=questions[12].alternative%></button></td>
+          <td><button class="btn success"><%=questions[13].alternative%></button></td>
+          <td><button class="btn success"><%=questions[14].alternative%></button></td>
+          <td><button type="submit" class="btn btn-primary">Submit</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="question-1">
+      <thead>
+        <tr>
+          <th scope="col">Question</th>
+          <th scope="col">Alternative 1</th>
+          <th scope="col">Altternative 2</th>
+          <th scope="col">Altternative 3</th>
+          <th scope="col">Altternative 4</th>
+          <th scope="col">Altternative 5</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%=questions[15].question%></td>
+          <td><button class="btn success"><%=questions[15].alternative%></button></td>
+          <td><button class="btn success"><%=questions[16].alternative%></button></td>
+          <td><button class="btn success"><%=questions[17].alternative%></button></td>
+          <td><button class="btn success"><%=questions[18].alternative%></button></td>
+          <td><button class="btn success"><%=questions[19].alternative%></button></td>
+          <td><button type="submit" class="btn btn-primary">Submit</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="question-1">
+      <thead>
+        <tr>
+          <th scope="col">Question</th>
+          <th scope="col">Alternative 1</th>
+          <th scope="col">Altternative 2</th>
+          <th scope="col">Altternative 3</th>
+          <th scope="col">Altternative 4</th>
+          <th scope="col">Altternative 5</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%=questions[20].question%></td>
+          <td><button class="btn success"><%=questions[20].alternative%></button></td>
+          <td><button class="btn success"><%=questions[21].alternative%></button></td>
+          <td><button class="btn success"><%=questions[22].alternative%></button></td>
+          <td><button class="btn success"><%=questions[23].alternative%></button></td>
+          <td><button class="btn success"><%=questions[24].alternative%></button></td>
+          <td><button type="submit" class="btn btn-primary">Submit</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </section>
+  </main>
+
+</body>
+</html>

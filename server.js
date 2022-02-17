@@ -8,6 +8,7 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+const database = require('./lib/database');
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -62,7 +63,40 @@ app.use("/api/alternatives", alternativesRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  res.render("index");
+  Promise.all([
+    database.getAllQuizzes(),
+    database.getAllTests(),
+  ])
+  .then((data) => {
+    const quizzes = data[0];
+    const tests = data[1];
+    const templateVars = { quizzes, tests };
+    console.log(templateVars);
+    res.render("index", templateVars);
+  })
+  .catch((err) => {
+    res.status(500).json({ error: err.message });
+  });
+});
+app.get("/startQuiz/:id", (req, res) => {
+  Promise.all([
+    database.getQuizByQuizId(req.params.id),
+    database.getQuestionsByQuizId(req.params.id),
+    database.getAlternativesByAlternativeId(req.params.id),
+
+  ])
+
+      .then((data) => {
+        const quiz = data[0]
+        const questions  = data[1]
+        const alternatives = data[2]
+        let templateVars = {quiz, questions, alternatives};
+        console.log("here",templateVars)
+        res.render("startQuiz", templateVars)
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
 });
 
 
