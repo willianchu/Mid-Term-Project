@@ -22,12 +22,14 @@ VALUES (
 
 INSERT INTO quizzes (title, description, cut_note, time_limit, url_quiz_image, owner_id, is_unlisted)
 VALUES
-('TV Movie Quiz', 'This is a quiz about TV Movie interesting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/____________________________________4900867.png', 5,false),
+('TV Movie Quiz', 'This is a quiz about TV Movie interesting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/____________________________________4900867.png', 5,true),
 ('Music Quiz', 'This is a quiz about Music interesting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/4816224.png?97', 4,false),
-('Food Quiz', 'This is a quiz about Food interesting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/3002580.png?103', 3, false),
+('Food Quiz', 'This is a quiz about Food interesting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/3002580.png?103', 3, true),
 ('General Quiz', 'This is a quiz about General interesting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/9528554.png?81', 2, false),
-('Starwars Quiz', 'This is a quiz about Starwars interesting questions', 80, 600000, 'https://th.bing.com/th/id/OIP.aGLKTgirRYB7xLsSOet5kQHaEK?pid=ImgDet&rs=1', 1, false),
-('ICBC Quiz', 'This is a quiz about ICBC interesting questions', 90, 600000, 'https://yt3.ggpht.com/-mKidUqtufnY/AAAAAAAAAAI/AAAAAAAAAAA/Zt6m4aW1JWE/s900-c-k-no/photo.jpg', 1);
+('Starwars Quiz', 'This is a quiz about Starwars interesting questions', 80, 600000, 'https://th.bing.com/th/id/OIP.aGLKTgirRYB7xLsSOet5kQHaEK?pid=ImgDet&rs=1', 1, false);
+INSERT INTO quizzes (title, description, cut_note, time_limit, url_quiz_image, owner_id, is_unlisted)
+VALUES
+('ICBC Quiz', 'This is a quiz about ICBC interesting questions', 90, 600000, 'https://yt3.ggpht.com/-mKidUqtufnY/AAAAAAAAAAI/AAAAAAAAAAA/Zt6m4aW1JWE/s900-c-k-no/photo.jpg', 1, false);
 
 INSERT INTO questions (question, url_picture_link, quiz_id)
 VALUES
@@ -140,7 +142,7 @@ INSERT INTO tests (user_id, quiz_id, date_created, finish_date) VALUES
 (2, 6, NOW()::timestamp, NOW()::timestamp),
 (3, 6, NOW()::timestamp, NOW()::timestamp),
 (4, 6, NOW()::timestamp, NOW()::timestamp),
-(5, 6, NOW()::timestamp, NOW()::timestamp)
+(5, 6, NOW()::timestamp, NOW()::timestamp),
 (1, 5, NOW()::timestamp, NOW()::timestamp);
 
 INSERT INTO answers (question_id, alternative_id, test_id)

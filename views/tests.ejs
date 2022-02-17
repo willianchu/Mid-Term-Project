@@ -38,9 +38,14 @@
 		<p><%=quizAverage[0].description%>. (Created by <%=quizAverage[0].name%>)</p>
 		
 		<hr>
+		<% if(quiz[0].score = 0){ %>
+			<p><a class="quiz-link" href="/quizzes/<%= quizAverage['id'] %>">Start Quiz</a</p>
+		<% } else {%>
+			<p>You got <%=quiz[0].score%> out of <%=quiz[0].questions.length%> correct.</p>
 		<button type="button" class="collapsible">Your Results</button>
 		<p>You got <%=Math.round(quiz[0].score,2)%>%! The average of this quiz is <%=Math.round(quizScore[0].average_result,2)%>%.</p>
 		<p>You <%=quiz[0].result%>, the minimum of correct answers is <%=quizAverage[0].cut_note%>%.</p>.
+		<% } %>
 
 		<section class="results">
 			<section class="results" id="test-results">
