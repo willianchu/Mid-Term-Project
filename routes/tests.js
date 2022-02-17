@@ -27,7 +27,7 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     database.insertTest(req.body)
       .then((newTest) => {
-        return newTest.id;
+        return newTest;
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
