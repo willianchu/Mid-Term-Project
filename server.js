@@ -110,13 +110,14 @@ app.get("/quizzes/:id", (req, res) => {
   });
 });
 app.post("/quizzes/:id", (req, res) => {
+  let testId;
   console.log(req.body);
   database.insertTest({
     'user_id': req.session.user_id,
     'quiz_id': req.params.id,
   })
   .then((newTest) => {
-    const testId = Number(newTest[0].id);
+    testId = Number(newTest[0].id);
     for (const questionKey in req.body) {
       const questionId = Number(questionKey.split('-')[1]);
       const alternativeId = Number(req.body[questionKey]);
@@ -128,7 +129,7 @@ app.post("/quizzes/:id", (req, res) => {
       database.insertAnswer(answers);
     }
   });
-  // res.redirect("/")
+  // res.redirect(`/results/${testId}`)
 });
 
 
