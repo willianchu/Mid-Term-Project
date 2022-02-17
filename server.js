@@ -95,12 +95,12 @@ app.get("/quizzes/:id", (req, res) => {
     database.getAllAlternatives(),
   ])
   .then((data) => {
-    const quiz = data[0]
-    const questions  = data[1]
-    const alternatives = data[2]
+    const quiz = data[0];
+    const questions  = data[1];
+    const alternatives = data[2];
     for(let question of questions){
       let currentAlternative = alternatives.filter(el =>el.question_id === question.id)
-      question["alternatives"] = currentAlternative
+      question["alternatives"] = currentAlternative;
     }
     let templateVars = {quiz, questions};
     res.render("quizzes", templateVars)
@@ -110,12 +110,13 @@ app.get("/quizzes/:id", (req, res) => {
   });
 });
 app.post("/quizzes/:id", (req, res) => {
+  console.log(req.body);
   database.insertTest({
     'user_id': req.session.user_id,
-    'quiz_id': req.param.id,
+    'quiz_id': req.params.id,
   })
   .then((newTest) => {
-    const testId = Number(newTest.id);
+    const testId = Number(newTest[0].id);
     for (const questionKey in req.body) {
       const questionId = Number(questionKey.split('-')[1]);
       const alternativeId = Number(req.body[questionKey]);
@@ -127,7 +128,6 @@ app.post("/quizzes/:id", (req, res) => {
       database.insertAnswer(answers);
     }
   });
-  console.log(req.body);
   // res.redirect("/")
 });
 
