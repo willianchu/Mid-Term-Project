@@ -30,20 +30,26 @@
 		
 		<hr>
 		<h3 class="title">Your Results</h3>
-		<p>You got <%=Math.round(quiz[0].score,2)%>% out of <%=Math.round(quizScore[0].average_result,2)%>% questions correct</p>
+		<p>You got <%=Math.round(quiz[0].score,2)%>%! The average of this quiz is <%=Math.round(quizScore[0].average_result,2)%>%.</p>
 		<p>You <%=quiz[0].result%></p>
 
 		<section class="results">
 			<section class="results" id="test-results">
 				
 			</section>
-			<h3 class="title">Question 1</h3>
-			<p class="question-img">— insert picture</p>
-			<p class="quote">alternative 1.</p>
-			<p class="quote">alternative 1.</p>
-			<p class="quote">alternative 1.</p>
-			<p class="quote">alternative 1.</p>
-			<p class="quote">alternative 1.</p>		
+			<h3 class="title">Ranking</h3>
+				<table id="ranking">
+					<tr>
+						<th>name</th>
+						<th>result</th>
+					</tr>
+					<% for (let user of userScore) { %>
+						<tr>
+							<td><%= user['name'] %></td>
+							<td><%= Math.round(user['users_results'], 2) %></td>
+						</tr>
+					<% } %>
+				</table>
 		</section>
 		
 	

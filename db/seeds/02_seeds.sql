@@ -22,12 +22,12 @@ VALUES (
 
 INSERT INTO quizzes (title, description, cut_note, time_limit, url_quiz_image, owner_id)
 VALUES
-('TV Movie Quiz', 'This is a quiz about TV Movie intersting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/____________________________________4900867.png', 5),
-('Music Quiz', 'This is a quiz about Music intersting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/4816224.png?97', 4),
-('Food Quiz', 'This is a quiz about Food intersting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/3002580.png?103', 3),
-('General Quiz', 'This is a quiz about General intersting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/9528554.png?81', 2),
-('Starwars Quiz', 'This is a quiz about Starwars intersting questions', 80, 600000, 'https://th.bing.com/th/id/OIP.aGLKTgirRYB7xLsSOet5kQHaEK?pid=ImgDet&rs=1', 1),
-('ICBC Quiz', 'This is a quiz about ICBC intersting questions', 90, 600000, 'https://yt3.ggpht.com/-mKidUqtufnY/AAAAAAAAAAI/AAAAAAAAAAA/Zt6m4aW1JWE/s900-c-k-no/photo.jpg', 1);
+('TV Movie Quiz', 'This is a quiz about TV Movie interesting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/____________________________________4900867.png', 5),
+('Music Quiz', 'This is a quiz about Music interesting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/4816224.png?97', 4),
+('Food Quiz', 'This is a quiz about Food interesting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/3002580.png?103', 3),
+('General Quiz', 'This is a quiz about General interesting questions', 50, 900000, 'https://freequizdatabase.weebly.com/uploads/3/0/7/8/30786221/9528554.png?81', 2),
+('Starwars Quiz', 'This is a quiz about Starwars interesting questions', 80, 600000, 'https://th.bing.com/th/id/OIP.aGLKTgirRYB7xLsSOet5kQHaEK?pid=ImgDet&rs=1', 1),
+('ICBC Quiz', 'This is a quiz about ICBC interesting questions', 90, 600000, 'https://yt3.ggpht.com/-mKidUqtufnY/AAAAAAAAAAI/AAAAAAAAAAA/Zt6m4aW1JWE/s900-c-k-no/photo.jpg', 1);
 
 INSERT INTO questions (question, url_picture_link, quiz_id)
 VALUES
