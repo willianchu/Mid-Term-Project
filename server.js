@@ -134,13 +134,15 @@ app.post("/quizzes/:id", (req, res) => {
 });
 
 app.get("/tests/:id", (req, res) => {
+  console.log("params",req.params.id);
   database.getTestsByTestId(req.params.id)
     .then((data) => { // retrieve test data
       const test = data;
-      console.log(test.quiz_id, test.user_id);
+      console.log(test);
       //####
       Promise.all([ // get Stats
-        database.quizAverage(test.quiz_id), 
+        database.getQuizByQuizId(test.quiz_id),// get quiz data
+        database.quizAverage(test.quiz_id), //
         database.getQuizScore(test.quiz_id),// get quiz score of all users
         database.getUserScore(test.user_id, test.quiz_id) // get user score
       ])
@@ -148,9 +150,10 @@ app.get("/tests/:id", (req, res) => {
           const quizAverage = data[0];
           const quizScore = data[1];
           const userScore = data[2];
-          const templateVars = {quizAverage, quizScore, userScore};
+          const quiz = data[3];
+          const templateVars = {quizAverage, quizScore, userScore, quiz};
           console.log(templateVars);
-          res.render("results", templateVars);
+          res.render("tests", templateVars);
         })
         .catch((err) => {
           res.status(500).json({ error: err.message });
