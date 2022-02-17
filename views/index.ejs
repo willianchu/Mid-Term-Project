@@ -48,10 +48,6 @@
           <input type="text" id="option2-text" placeholder="Option 2">
           <input type="radio" id="option2-radio" name="correct-option">
         </div>
-        <div id="more-options-button">
-          <span id="more-options-text">More options</span>
-          <i class="fa-solid fa-caret-down"></i>
-        </div>
         <div id="more-questions-button">
           <span id="more-questions-text">More questions</span>
           <i class="fa-solid fa-caret-down"></i>
@@ -95,6 +91,7 @@
             <tr>
               <td><%= test['title'] %></td>
               <td><%= test['user_id'] %></td>
+              <td><%= test['finish_date'].toLocaleString('en-US', { timeZone: 'America/Vancouver' }) %></td>
               <td><a class="test-link" href="/tests/<%= test['id'] %>">View Result</a></td>
               <td><a class="copy-test-link">Share Result</a></td>
             </tr>

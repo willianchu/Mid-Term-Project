@@ -10,10 +10,6 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cookieSession = require('cookie-session');
 const database = require('./lib/database');
-app.use(cookieSession({
-  name: 'session',
-  keys: ['key1', 'key2']
-}))
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -28,6 +24,10 @@ app.use(morgan("dev"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}))
 
 app.use(
   "/styles",
@@ -54,7 +54,7 @@ const questionsRoutes = require("./routes/questions");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
+// app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/quizzes", quizzesRoutes(db));
 app.use("/api/answers", answersRoutes(db));
@@ -67,20 +67,16 @@ app.use("/api/alternatives", alternativesRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-app.get("/:id", (req, res) => {
-  req.session.user_id = req.params.id;
-  res.redirect("/");
-});
-
 app.get("/", (req, res) => {
   Promise.all([
     database.getAllQuizzes(),
     database.getAllTests(),
   ])
   .then((data) => {
+    const userId = req.session.user_id;
     const quizzes = data[0];
-    const tests = data[1];
-    const templateVars = { quizzes, tests };
+    const tests = data[1].filter(item => (item.user_id === Number(userId)));
+    const templateVars = { quizzes, tests, userId };
     res.render("index", templateVars);
   })
   .catch((err) => {
@@ -99,10 +95,13 @@ app.get("/quizzes/:id", (req, res) => {
     const questions  = data[1];
     const alternatives = data[2];
     for(let question of questions){
-      let currentAlternative = alternatives.filter(el =>el.question_id === question.id)
+      let currentAlternative = alternatives.filter(el =>el.question_id === question.id);
       question["alternatives"] = currentAlternative;
     }
-    let templateVars = {quiz, questions};
+    const userId = req.session.user_id;
+    console.log('User ID:', userId);
+    console.log('User:', req.session);
+    let templateVars = {quiz, questions, userId};
     res.render("quizzes", templateVars)
   })
   .catch((err) => {
@@ -110,14 +109,15 @@ app.get("/quizzes/:id", (req, res) => {
   });
 });
 app.post("/quizzes/:id", (req, res) => {
+  console.log('Cookie Session', req.session);
+  console.log('User ID', req.session.user_id);
   let testId;
-  console.log(req.body);
   database.insertTest({
-    'user_id': req.session.user_id,
-    'quiz_id': req.params.id,
+    'user_id': Number(req.session.user_id),
+    'quiz_id': Number(req.params.id),
   })
   .then((newTest) => {
-    testId = Number(newTest[0].id);
+    testId = Number(newTest.id);
     for (const questionKey in req.body) {
       const questionId = Number(questionKey.split('-')[1]);
       const alternativeId = Number(req.body[questionKey]);
@@ -128,11 +128,18 @@ app.post("/quizzes/:id", (req, res) => {
       }
       database.insertAnswer(answers);
     }
+    res.redirect(`/results/${testId}`);
+  })
+  .catch((err) => {
+    res.status(500).json({ error: err.message });
   });
-  // res.redirect(`/results/${testId}`)
 });
 
-
+app.get("/login/:id", (req, res) => {
+  req.session.user_id = req.params.id;
+  console.log('/', req.session);
+  res.redirect("/");
+});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
