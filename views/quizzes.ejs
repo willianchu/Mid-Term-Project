@@ -36,7 +36,7 @@
     <section id ="question-table">
       <button type="button" class="collapsible"><%=quiz[0].title%></button>
       <div class="quiz-content">
-        <form action="/quizzes" method="POST">
+        <form action="/quizzes/<%=quiz[0].id%>" method="POST">
     <table class="question-1">
       <thead>
         <tr>

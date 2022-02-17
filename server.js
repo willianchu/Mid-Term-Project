@@ -8,7 +8,12 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+const cookieSession = require('cookie-session');
 const database = require('./lib/database');
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}))
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -62,6 +67,11 @@ app.use("/api/alternatives", alternativesRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
+app.get("/:id", (req, res) => {
+  req.session.user_id = req.params.id;
+  res.redirect("/");
+});
+
 app.get("/", (req, res) => {
   Promise.all([
     database.getAllQuizzes(),
@@ -77,12 +87,12 @@ app.get("/", (req, res) => {
     res.status(500).json({ error: err.message });
   });
 });
+
 app.get("/quizzes/:id", (req, res) => {
   Promise.all([
     database.getQuizByQuizId(req.params.id),
     database.getQuestionsByQuizId(req.params.id),
     database.getAllAlternatives(),
-
   ])
   .then((data) => {
     const quiz = data[0]
@@ -99,14 +109,22 @@ app.get("/quizzes/:id", (req, res) => {
     res.status(500).json({ error: err.message });
   });
 });
-app.post("/quizzes", (req, res) => {
-  database.insertTest(userId, quizId)
+app.post("/quizzes/:id", (req, res) => {
+  database.insertTest({
+    'user_id': req.session.user_id,
+    'quiz_id': req.param.id,
+  })
   .then((newTest) => {
     const testId = Number(newTest.id);
     for (const questionKey in req.body) {
       const questionId = Number(questionKey.split('-')[1]);
       const alternativeId = Number(req.body[questionKey]);
-      console.log([questionId, alternativeId, testId]);
+      const answers = {
+        'question_id': questionId,
+        'alternative_id': alternativeId,
+        'test_id': testId,
+      }
+      database.insertAnswer(answers);
     }
   });
   console.log(req.body);
