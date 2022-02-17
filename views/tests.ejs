@@ -20,16 +20,22 @@
 	<header>
 
 	</header>
-
+	
 	<section class="results">
-		<h3 class="title">Quiz</h3>
-		<p class="quiz-img">— insert picture</p>
-		<p>Lorem ipsum dolor sit Description, consectetur adipiscing elit. Nullam id felis et ipsum bibendum ultrices. Morbi vitae pulvinar velit. Sed aliquam dictum sapien, id sagittis augue malesuada eu.</p>
+		<h3 class="title"><%=quizAverage[0].title%></h3>
+		<p></p>
+		<p><%=quizAverage[0].description%></p>
+		<p>Minimum of correct answers is <%=quizAverage[0].cut_note%></p>
+		<p> Created by <%=quizAverage[0].name%></p>
+		
 		<hr>
+		<h3 class="title">Your Results</h3>
+		<p>You got <%=Math.round(quiz[0].score,2)%>% out of <%=Math.round(quizScore[0].average_result,2)%>% questions correct</p>
+		<p>You <%=quiz[0].result%></p>
 
 		<section class="results">
 			<section class="results" id="test-results">
-				<p>Loading...</p>
+				
 			</section>
 			<h3 class="title">Question 1</h3>
 			<p class="question-img">— insert picture</p>
