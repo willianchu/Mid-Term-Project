@@ -71,18 +71,17 @@ app.get("/", (req, res) => {
     const quizzes = data[0];
     const tests = data[1];
     const templateVars = { quizzes, tests };
-    console.log(templateVars);
     res.render("index", templateVars);
   })
   .catch((err) => {
     res.status(500).json({ error: err.message });
   });
 });
-app.get("/startQuiz/:id", (req, res) => {
+app.get("/quizzes/:id", (req, res) => {
   Promise.all([
     database.getQuizByQuizId(req.params.id),
     database.getQuestionsByQuizId(req.params.id),
-    database.getAlternativesByAlternativeId(req.params.id),
+    database.getAllAlternatives(),
 
   ])
 
@@ -90,15 +89,23 @@ app.get("/startQuiz/:id", (req, res) => {
         const quiz = data[0]
         const questions  = data[1]
         const alternatives = data[2]
-        let templateVars = {quiz, questions, alternatives};
-        console.log("here",templateVars)
-        res.render("startQuiz", templateVars)
+        for(let question of questions){
+          let currentAlternative = alternatives.filter(el =>el.question_id === question.id)
+          question["alternatives"] = currentAlternative
+        }
+        let templateVars = {quiz, questions};
+        res.render("quizzes", templateVars)
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
 });
-
+app.post("/answers", (req, res) => {
+  database.insertTest(req.body)
+  const testID = test.id
+console.log(req.body)
+  // res.redirect("/")
+});
 
 
 app.listen(PORT, () => {

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Quiz App - startQuiz</title>
+
+  <!-- Meta Information -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name='viewport' content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <!-- External JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- App JS -->
+  <script type="text/javascript" src="/scripts/app.js"></script>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Patua+One&family=Source+Sans+Pro:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
+
+  <!-- App CSS -->
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css">
+  <link rel="stylesheet" href="/styles/main.css" type="text/css">
+  <link rel="stylesheet" href="/styles/header.css" type="text/css">
+  <link rel="stylesheet" href="/styles/startQuiz.css" type="text/css">
+
+</head>
+<body>
+  <%- include('partials/_header') %>
+  <main style="margin: 1em;">
+    <section id ="question-table">
+      <button type="button" class="collapsible"><%=quiz[0].title%></button>
+      <div class="quiz-content">
+        <form action="/answers" method="POST">
+    <table class="question-1">
+      <thead>
+        <tr>
+          <th scope="col">Question</th>
+          <th scope="col">Alternative 1</th>
+          <th scope="col">Altternative 2</th>
+          <th scope="col">Altternative 3</th>
+          <th scope="col">Altternative 4</th>
+          <th scope="col">Altternative 5</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% for (let question of questions) { %>
+        <tr>
+         <td><%=question.question%></td>
+        <% for (let alternative of question.alternatives) {%>
+          <td>
+            <div>
+              <input type="radio" name="question-<%=question.id%>-answers" id="question-<%=alternative.id%>-answers" value="<%=alternative.id%>" />
+              <label for="question-<%=alternative.id%>-answers"><%=alternative.alternative%></label>
+          </div>
+          </td>
+        <% } %>
+          </tr>
+          <% } %>
+      </tbody>
+      </table>
+      <button type="submit" >Submit Quiz</button>
+    </form>
+  </section>
+  </main>
+
+</body>
+</html>
