@@ -132,8 +132,24 @@ app.post("/quizzes/:id", (req, res) => {
   // res.redirect(`/results/${testId}`)
 });
 
-app.get("/results/:id", (req, res) => {
-  console.log(req);
+app.get("/tests/:id", (req, res) => {
+  let userId = req.session.user_id;
+  console.log(userId);
+  Promise.all([
+    database.quizAverage(req.params.id),
+    database.getQuizScore(req.params.id),
+    database.getUserScore(userId ,req.params.id)
+  ])
+    .then((data) => {
+      const quizAverage = data[0];
+      const quizScore = data[1];
+      const userScore = data[2];
+      const templateVars = { quizAverage, quizScore, userScore };
+      res.render("tests", templateVars);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
 });
 
 app.listen(PORT, () => {
