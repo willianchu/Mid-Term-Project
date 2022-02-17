@@ -1,119 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <title>Quiz App - Home Page</title>
-
-  <!-- Meta Information -->
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name='viewport' content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
-  <!-- External JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-  <!-- App JS -->
-  <script type="text/javascript" src="/scripts/app.js"></script>
-
-  <!-- External CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" type="text/css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Patua+One&family=Source+Sans+Pro:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
-
-  <!-- App CSS -->
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css">
-  <link rel="stylesheet" href="/styles/main.css" type="text/css">
-  <link rel="stylesheet" href="/styles/header.css" type="text/css">
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quiz App -challenging your mind</title>
+    <!-- JQuery CDN-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<!-- Import Fonts Bungee && Source Sans Pro -->
+		<!-- main Header -->
+		<link rel="stylesheet" href="/styles/layout.css" type="text/css">
+		<link rel="stylesheet" href="/styles/main.css" type="text/css">
+		<link rel="stylesheet" href="/styles/header.css" type="text/css">
+		<!-- format styles later ...  -->
 </head>
+
 <body>
-  <%- include('partials/_header') %>
-  <main>
-    <section id="create">
-      <div id="create-a-new-quiz">
-        <i class="fa-solid fa-plus"></i>
-        <span>Create A New Quiz</span>
-      </div>
-      <form id="create-form">
-        <input type="text" id="quiz-title" placeholder="Quiz"><br>
-        <input type="text" id="question1-title" placeholder="Question"><br>
-        <div>
-          <input type="text" id="option1-text" placeholder="Option 1">
-          <input type="radio" id="option1-radio" name="correct-option">
-        </div>
-        <div>
-          <input type="text" id="option2-text" placeholder="Option 2">
-          <input type="radio" id="option2-radio" name="correct-option">
-        </div>
-        <div id="more-options-button">
-          <span id="more-options-text">More options</span>
-          <i class="fa-solid fa-caret-down"></i>
-        </div>
-        <div id="more-questions-button">
-          <span id="more-questions-text">More questions</span>
-          <i class="fa-solid fa-caret-down"></i>
-        </div>
-        <div>
-          <input type="checkbox" id="unlisted-checkbox"><label for="unlisted-checkbox">Make this quiz private</label>
-        </div>
-        <input type="submit" value="Submit">
-      </form>
-    </section>
-    <section id="tables">
-      <button type="button" class="collapsible">Quizzes</button>
-      <div class="content">
-        <table id="quizzes">
-          <tr>
-            <th>Quiz Title</th>
-            <th>User ID</th>
-            <th>Date</th>
-            <th>Start Test</th>
-            <th>Share Test</th>
-          <tr>
-            <td>Quiz 1</td>
-            <td>1</td>
-            <td>Sep 12th 2020</td>
-            <td><a href="/">Start Test</a></td>
-            <td><a href="/">Share Test</a></td>
-          </tr>
-          <tr>
-            <td>Quiz 2</td>
-            <td>1</td>
-            <td>Nov 11th 2018</td>
-            <td><a href="/">Start Test</a></td>
-            <td><a href="/">Share Test</a></td>
-          </tr>
-        </table>
-      </div>
-      <button type="button" class="collapsible">Attempts</button>
-      <div class="content">
-        <table id="attempts">
-          <tr>
-            <th>Quiz Title</th>
-            <th>User ID</th>
-            <th>Date</th>
-            <th>View Result</th>
-            <th>Share Result</th>
-          </tr>
-          <tr>
-            <td>Quiz 1</td>
-            <td>1</td>
-            <td>Sep 12th 2020</td>
-            <td><a href="/">View Result</a></td>
-            <td><a href="/">Share Result</a></td>
-          </tr>
-          <tr>
-            <td>Quiz 2</td>
-            <td>1</td>
-            <td>Nov 11th 2018</td>
-            <td><a href="/">View Result</a></td>
-            <td><a href="/">Share Result</a></td>
-          </tr>
-        </table>
-      </div>
-    </section>
-  </main>
+
+	<header>
+		<h2><a href="#">Website Logo</a></h2>
+		<nav>
+			<li><a href="#">Home</a></li>
+			<li><a href="#">About</a></li>
+			<li><a href="#">Contacts</a></li>
+			<li><a href="#">Login</a></li>
+		</nav>
+	</header>
+
+
+	<section class="hero">
+		<!-- <div class="background-image" style="background-image: url(https://www.wallpapers13.com/vancouver-city-in-canada-west-coast-seaport-in-british-columbia-night-landscape-hd-wallpaper/);"></div> -->
+		<h1>Congratulations you have been approved!</h1>
+		<h3>Your total score is 100%</h3>
+		<a href="https://localhost:8080" class="btn">Home Button</a>
+	</section>
+
+
+	<section class="your-test">
+		<h3 class="title">Quiz</h3>
+		<p class="quiz-img">— insert picture</p>
+		<p>Lorem ipsum dolor sit Description, consectetur adipiscing elit. Nullam id felis et ipsum bibendum ultrices. Morbi vitae pulvinar velit. Sed aliquam dictum sapien, id sagittis augue malesuada eu.</p>
+		<hr>
+
+		<section class="results">
+			<section class="results" id="test-results">
+				<p>Loading...</p>
+			</section>
+			<h3 class="title">Question 1</h3>
+			<p class="question-img">— insert picture</p>
+			<p class="quote">alternative 1.</p>
+			<p class="quote">alternative 1.</p>
+			<p class="quote">alternative 1.</p>
+			<p class="quote">alternative 1.</p>
+			<p class="quote">alternative 1.</p>		
+		</section>
+		
+	
+	<footer>
+		<ul>
+			<li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+			<li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+			<li><a href="#"><i class="fa fa-snapchat-square"></i></a></li>
+			<li><a href="#"><i class="fa fa-pinterest-square"></i></a></li>
+			<li><a href="#"><i class="fa fa-github-square""></i></a></li>
+		</ul>
+		<p>Made by <a href="https://www.lighthouselabs.ca/" target="_blank">Boot camp lighthouselabs link</a>. </footer>
+	<!-- scripts enter here -->
+	<script src="/public/scripts/main.js"></script>	
 </body>
+
+</html>
