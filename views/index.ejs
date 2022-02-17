@@ -75,8 +75,8 @@
             <tr>
               <td><%= quiz['title'] %></td>
               <td><%= quiz['owner_id'] %></td>
-              <td><a href="/quizzes/<%= quiz['id'] %>">Start Quiz</a></td>
-              <td><a href="/">Share Quiz</a></td>
+              <td><a class="quiz-link" href="/quizzes/<%= quiz['id'] %>">Start Quiz</a></td>
+              <td><a class="copy-quiz-link">Share Quiz</a></td>
             </tr>
           <% } %>
         </table>
@@ -95,9 +95,9 @@
             <tr>
               <td><%= test['title'] %></td>
               <td><%= test['user_id'] %></td>
-              <td><%= test['finish_date'] %></td>
-              <td><a href="/tests/<%= test['id'] %>">View Result</a></td>
-              <td><a href="/">Share Result</a></td>
+              <td><%= test['finish_date'].toLocaleString('en-US', { timeZone: 'America/New_York' }) %></td>
+              <td><a class="test-link" href="/tests/<%= test['id'] %>">View Result</a></td>
+              <td><a class="copy-test-link">Share Result</a></td>
             </tr>
           <% } %>
         </table>
