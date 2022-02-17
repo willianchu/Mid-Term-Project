@@ -51,6 +51,7 @@ const alternativesRoutes = require("./routes/alternatives");
 
 const answersRoutes = require("./routes/answers");
 const questionsRoutes = require("./routes/questions");
+const { render } = require("express/lib/response");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -130,6 +131,35 @@ app.post("/quizzes/:id", (req, res) => {
     }
   });
   // res.redirect(`/results/${testId}`)
+});
+
+app.get("/tests/:id", (req, res) => {
+  database.getTestsByTestId(req.params.id)
+    .then((data) => { // retrieve test data
+      const test = data;
+      console.log(test.quiz_id, test.user_id);
+      //####
+      Promise.all([ // get Stats
+        database.quizAverage(test.quiz_id), 
+        database.getQuizScore(test.quiz_id),// get quiz score of all users
+        database.getUserScore(test.user_id, test.quiz_id) // get user score
+      ])
+        .then((data) => {
+          const quizAverage = data[0];
+          const quizScore = data[1];
+          const userScore = data[2];
+          const templateVars = {quizAverage, quizScore, userScore};
+          console.log(templateVars);
+          res.render("results", templateVars);
+        })
+        .catch((err) => {
+          res.status(500).json({ error: err.message });
+        });
+      //#####
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
 });
 
 
