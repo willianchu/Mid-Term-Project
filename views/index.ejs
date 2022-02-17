@@ -82,7 +82,7 @@
         <table id="attempts">
           <tr>
             <th>Quiz Title</th>
-            <th>User ID</th>
+            <th>Test ID</th>
             <th>Date</th>
             <th>View Result</th>
             <th>Share Result</th>
@@ -90,7 +90,7 @@
           <% for (let test of tests) { %>
             <tr>
               <td><%= test['title'] %></td>
-              <td><%= test['user_id'] %></td>
+              <td><%= test['id'] %></td>
               <td><%= test['finish_date'].toLocaleString('en-US', { timeZone: 'America/Vancouver' }) %></td>
               <td><a class="test-link" href="/tests/<%= test['id'] %>">View Result</a></td>
               <td><a class="copy-test-link">Share Result</a></td>

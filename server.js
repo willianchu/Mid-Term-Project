@@ -42,7 +42,6 @@ app.use(express.static("public"));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
 const quizzesRoutes = require("./routes/quizzes");
 const testsRoutes = require("./routes/tests");
@@ -100,8 +99,6 @@ app.get("/quizzes/:id", (req, res) => {
       question["alternatives"] = currentAlternative;
     }
     const userId = req.session.user_id;
-    console.log('User ID:', userId);
-    console.log('User:', req.session);
     let templateVars = {quiz, questions, userId};
     res.render("quizzes", templateVars)
   })
@@ -110,15 +107,13 @@ app.get("/quizzes/:id", (req, res) => {
   });
 });
 app.post("/quizzes/:id", (req, res) => {
-  console.log('Cookie Session', req.session);
-  console.log('User ID', req.session.user_id);
   let testId;
   database.insertTest({
     'user_id': Number(req.session.user_id),
     'quiz_id': Number(req.params.id),
   })
   .then((newTest) => {
-    testId = Number(newTest.id);
+    testId = Number(newTest[0].id);
     for (const questionKey in req.body) {
       const questionId = Number(questionKey.split('-')[1]);
       const alternativeId = Number(req.body[questionKey]);
@@ -138,17 +133,13 @@ app.post("/quizzes/:id", (req, res) => {
 
 app.get("/login/:id", (req, res) => {
   req.session.user_id = req.params.id;
-  console.log('/', req.session);
   res.redirect("/");
 });
 
 app.get("/tests/:id", (req, res) => {
-  console.log("params",req.params.id);
   database.getTestsByTestId(req.params.id)
     .then((data) => { // retrieve test data
       const test = data;
-      console.log(test);
-      //####
       Promise.all([ // get Stats
         database.getQuizByQuizId(test.quiz_id),// get quiz data
         database.quizAverage(test.quiz_id), //
@@ -161,13 +152,11 @@ app.get("/tests/:id", (req, res) => {
           const userScore = data[2];
           const quiz = data[3];
           const templateVars = {quizAverage, quizScore, userScore, quiz};
-          console.log(templateVars);
           res.render("tests", templateVars);
         })
         .catch((err) => {
           res.status(500).json({ error: err.message });
         });
-      //#####
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
