@@ -36,7 +36,7 @@
     <section id ="question-table">
       <button type="button" class="collapsible"><%=quiz[0].title%></button>
       <div class="quiz-content">
-        <form action="/answers" method="POST">
+        <form action="/quizzes" method="POST">
     <table class="question-1">
       <thead>
         <tr>
@@ -55,8 +55,8 @@
         <% for (let alternative of question.alternatives) {%>
           <td>
             <div>
-              <input type="radio" name="question-<%=question.id%>-answers" id="question-<%=alternative.id%>-answers" value="<%=alternative.id%>" />
-              <label for="question-<%=alternative.id%>-answers"><%=alternative.alternative%></label>
+              <input type="radio" name="question-<%=question.id%>-answers" id="question-<%=alternative.id%>-answer" value="<%=alternative.id%>" />
+              <label for="question-<%=alternative.id%>-answer"><%=alternative.alternative%></label>
           </div>
           </td>
         <% } %>

@@ -8,9 +8,9 @@ $(document).ready(function() {
       this.classList.toggle("active");
       let content = this.nextElementSibling;
       if (content.style.display === "flex") {
-        $(content).slideUp().then (() => content.style.display = "none");
+        $(content).slideUp().then(() => content.style.display = "none");
       } else {
-        $(content).slideDown().then (() => content.style.display = "flex");
+        $(content).slideDown().then(() => content.style.display = "flex");
       }
     });
   }

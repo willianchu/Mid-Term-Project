@@ -84,26 +84,32 @@ app.get("/quizzes/:id", (req, res) => {
     database.getAllAlternatives(),
 
   ])
-
-      .then((data) => {
-        const quiz = data[0]
-        const questions  = data[1]
-        const alternatives = data[2]
-        for(let question of questions){
-          let currentAlternative = alternatives.filter(el =>el.question_id === question.id)
-          question["alternatives"] = currentAlternative
-        }
-        let templateVars = {quiz, questions};
-        res.render("quizzes", templateVars)
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
+  .then((data) => {
+    const quiz = data[0]
+    const questions  = data[1]
+    const alternatives = data[2]
+    for(let question of questions){
+      let currentAlternative = alternatives.filter(el =>el.question_id === question.id)
+      question["alternatives"] = currentAlternative
+    }
+    let templateVars = {quiz, questions};
+    res.render("quizzes", templateVars)
+  })
+  .catch((err) => {
+    res.status(500).json({ error: err.message });
+  });
 });
-app.post("/answers", (req, res) => {
-  database.insertTest(req.body)
-  const testID = test.id
-console.log(req.body)
+app.post("/quizzes", (req, res) => {
+  database.insertTest(userId, quizId)
+  .then((newTest) => {
+    const testId = Number(newTest.id);
+    for (const questionKey in req.body) {
+      const questionId = Number(questionKey.split('-')[1]);
+      const alternativeId = Number(req.body[questionKey]);
+      console.log([questionId, alternativeId, testId]);
+    }
+  });
+  console.log(req.body);
   // res.redirect("/")
 });
 

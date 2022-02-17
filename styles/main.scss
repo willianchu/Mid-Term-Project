@@ -75,3 +75,29 @@ table {
 th {
   text-align: left;
 }
+
+#more-options-button {
+  color: beige;
+  background-color: saddlebrown;
+  border: 0.2em solid saddlebrown;
+  border-radius: 0.2em;
+  &:hover {
+    background-color: chocolate;
+    border: 0.2em solid chocolate;
+    cursor: pointer;
+    transition: 0.5s;
+  }
+}
+
+#more-questions-button {
+  color: beige;
+  background-color: saddlebrown;
+  border: 0.2em solid saddlebrown;
+  border-radius: 0.2em;
+  &:hover {
+    background-color: chocolate;
+    border: 0.2em solid chocolate;
+    cursor: pointer;
+    transition: 0.5s;
+  }
+}

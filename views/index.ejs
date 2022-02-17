@@ -59,7 +59,7 @@
         <div>
           <input type="checkbox" id="unlisted-checkbox"><label for="unlisted-checkbox">Make this quiz private</label>
         </div>
-        <input type="submit" value="Submit">
+        <button type="submit">Submit</button>
       </form>
     </section>
     <section id="tables">
@@ -95,9 +95,8 @@
             <tr>
               <td><%= test['title'] %></td>
               <td><%= test['user_id'] %></td>
-              <td><%= test['finish_date']</td>
-              <!-- <td><%= test['finish_date'].toLocaleString('en-US', { timeZone: 'America/New_York' }) %></td> -->
-              <td><a class="test-link" href="/tests/"+"<%= test['id'] %>">View Result</a></td>
+              <td><%= test['finish_date'].toLocaleString('en-US', { timeZone: 'America/Vancouver' }) %></td>
+              <td><a class="test-link" href="/tests/<%= test['id'] %>">View Result</a></td>
               <td><a class="copy-test-link">Share Result</a></td>
             </tr>
           <% } %>
