@@ -77,7 +77,7 @@ app.get("/", (req, res) => {
     res.status(500).json({ error: err.message });
   });
 });
-app.get("/startQuiz/:id", (req, res) => {
+app.get("/quizzes/:id", (req, res) => {
   Promise.all([
     database.getQuizByQuizId(req.params.id),
     database.getQuestionsByQuizId(req.params.id),
@@ -94,13 +94,15 @@ app.get("/startQuiz/:id", (req, res) => {
           question["alternatives"] = currentAlternative
         }
         let templateVars = {quiz, questions};
-        res.render("startQuiz", templateVars)
+        res.render("quizzes", templateVars)
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
 });
-app.post("/tests", (req, res) => {
+app.post("/answers", (req, res) => {
+  database.insertTest(req.body)
+  const testID = test.id
 console.log(req.body)
   // res.redirect("/")
 });
