@@ -4,7 +4,7 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    database.getAllAlternatives()
+    database.getAllAnswers()
       .then((data) => {
         const answers = data;
         res.json({ answers });
@@ -15,11 +15,7 @@ module.exports = (db) => {
   });
   router.get("/:id", (req, res) => {
 
-    // get one answer by id ? use function below
-    //database.getAlternativesByAlternativeId(req.params.answersID)
-    
-    // getAlternativesByQuestionId() group answers by question id
-    database.getAlternativesByQuestionId(req.params.id)
+    database.getAnswersByTestId(req.params.id)
       .then((data) => {
         const answer = data;
         res.json({ answer });
@@ -29,7 +25,7 @@ module.exports = (db) => {
       });
   });
   router.post("/", (req, res) => {
-    database.insertAlternative(req.body)
+    database.insertAnswer(req.body) // (question_id, alternative_id, test_id)
       .then(() => {
         res.json({ data: "Data created!" });
       })
@@ -39,7 +35,7 @@ module.exports = (db) => {
   });
   router.put("/:id", (req, res) => {
     console.log("route",req.params.id ,req.body);
-    database.updateAlternative(req.params.id ,req.body)
+    database.updateAnswer(req.params.id ,req.body)
       .then(() => {
         res.json({ data: "Data updated!" });
       })
@@ -48,7 +44,7 @@ module.exports = (db) => {
       });
   });
   router.delete("/:id", (req, res) => {
-    database.deleteAlternative(req.params.id)
+    database.deleteAnswers(req.params.id)
       .then((result) => {
         if  (result === null) {
           res.status(404).json({ error: "Data not found!" });
