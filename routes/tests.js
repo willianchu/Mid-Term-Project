@@ -14,6 +14,7 @@ module.exports = (db) => {
       });
   });
   router.get("/:id", (req, res) => {
+    console.log("userID",req.params.id);
     database.getTestsByUser(req.params.id)
       .then((data) => {
         const test = data;
@@ -25,8 +26,8 @@ module.exports = (db) => {
   });
   router.post("/", (req, res) => {
     database.insertTest(req.body)
-      .then(() => {
-        res.json({ data: "Data created!" });
+      .then((newTest) => {
+        return newTest.id;
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
