@@ -1,43 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Quiz App -challenging your mind</title>
-    <!-- JQuery CDN-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-		<!-- Import Fonts Bungee && Source Sans Pro -->
-		<!-- main Header -->
-		<link rel="stylesheet" href="/styles/layout.css" type="text/css">
-		<link rel="stylesheet" href="/styles/main.css" type="text/css">
-		<link rel="stylesheet" href="/styles/header.css" type="text/css">
-		<!-- format styles later ...  -->
+  <title>Quiz App - Home Page</title>
+
+  <!-- Meta Information -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name='viewport' content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <!-- External JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- App JS -->
+  <script type="text/javascript" src="/scripts/app.js"></script>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Patua+One&family=Source+Sans+Pro:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
+
+  <!-- App CSS -->
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css">
+  <link rel="stylesheet" href="/styles/main.css" type="text/css">
+  <link rel="stylesheet" href="/styles/header.css" type="text/css">
+
 </head>
-
 <body>
-
-	<header>
-
-	</header>
+  <%- include('partials/_header') %>
+  <main>
 	
 	<section class="results">
-		<h3 class="title"><%=quizAverage[0].title%></h3>
-		<p></p>
-		<p><%=quizAverage[0].description%></p>
-		<p>Minimum of correct answers is <%=quizAverage[0].cut_note%></p>
-		<p> Created by <%=quizAverage[0].name%></p>
+		<button type="button" class="collapsible"><%=quizAverage[0].title%></button>
+		<p><%=quizAverage[0].description%>. (Created by <%=quizAverage[0].name%>)</p>
 		
 		<hr>
-		<h3 class="title">Your Results</h3>
+		<button type="button" class="collapsible">Your Results</button>
 		<p>You got <%=Math.round(quiz[0].score,2)%>%! The average of this quiz is <%=Math.round(quizScore[0].average_result,2)%>%.</p>
-		<p>You <%=quiz[0].result%></p>
+		<p>You <%=quiz[0].result%>, the minimum of correct answers is <%=quizAverage[0].cut_note%>%.</p>.
 
 		<section class="results">
 			<section class="results" id="test-results">
-				
 			</section>
-			<h3 class="title">Ranking</h3>
+			<button type="button" class="collapsible">Ranking</button>
 				<table id="ranking">
 					<tr>
 						<th>name</th>
@@ -53,13 +61,12 @@
 		</section>
 		
 	
-	<footer>
-		<ul>
-
-		</ul>
-		<p>Made by <a href="https://www.lighthouselabs.ca/" target="_blank">Boot camp lighthouselabs link</a>. </footer>
+	<footer></footer>
+	
+	</main>
 	<!-- scripts enter here -->
 	<script src="/scripts/results.js"></script>	
+
 </body>
 
 </html>
