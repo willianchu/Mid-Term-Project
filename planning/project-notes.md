@@ -88,6 +88,7 @@ It will be created 5 entities as below (grouped quiz and questions), the sixth o
   *3.3 - insertQuiz() - insert a new quiz
   *3.4 - updateQuiz() - update a quiz
   *3.5 - deleteQuiz() - delete a quiz
+  *3.6 - updateQuizIsUnlisted() - update a quiz is_unlisted boolean
 
 - 04 search questions by quizzes
   4.1 - getAllQuestions() - get all questions
@@ -103,14 +104,22 @@ It will be created 5 entities as below (grouped quiz and questions), the sixth o
   *5.5 - deleteAlternative() - delete a alternative
 
 - 07 getQuizCorrectAlternatives() - get a complete quiz by quiz id (returns all questions and alternatives) - asked to final results
+*7.1 - searchAllAnswers() - get all answers
+*7.2 - getAnswersByTestId() Get all answers by Tesd Id
+*7.3 - insertAnswer() insert a new answer
+*7.4 - updateAnswer() update an answer
+*7.5 - deleteAnswer() delete an answer
 
 - 08 calculate average of the test for given quiz - quizAverage() - get the average of the test for given quiz made for all users.
 
 - 09 search tests by users - getTestsByUser()
+  09b - getTestsByUserId() - get tests by user id
   *9.1 - getAllTests() - get all tests
   *9.2 - insertTest() - insert a new test
   *9.3 - updateTest() - update a test
   *9.4 - deleteTest() - delete a test
+  *9.4b- SetFinishDate() - set finish date for a test
+  *9.5 - deleteTest() - get tests by user id
 
 - 10 getEasyQuestions() - get the easiest questions for a quiz (get a list of questions with more correct answers)
 - 11 getHardQuestions() - get the hard questions for a quiz (get a list of questions that have the most mistakes)
