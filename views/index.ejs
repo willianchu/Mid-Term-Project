@@ -39,28 +39,28 @@
       </button>
       <div class="content">
         <form id="create-form" action="/create" method="POST">
-          <input type="text" name="quiz-title" placeholder="Quiz Title"><br>
+          <input type="text" name="quiz-title" placeholder="Quiz Title" required><br>
           <div class="question-block">
-            <input type="text" name="question-1-title" placeholder="Question 1"><br>
+            <input type="text" name="question-1-title" placeholder="Question 1" required><br>
             <div>
-              <input type="text" name="question-1-option-1" placeholder="Option 1">
-              <input type="radio" name="question-1-answer-1">
+              <input type="text" name="question-1-option-1" placeholder="Option 1" required>
+              <input type="radio" name="question-1-answer" value="option-1" required>
             </div>
             <div>
-              <input type="text" name="question-1-option-2" placeholder="Option 2">
-              <input type="radio" name="question-1-answer-2">
+              <input type="text" name="question-1-option-2" placeholder="Option 2" required>
+              <input type="radio" name="question-1-answer" value="option-2" required>
             </div>
             <div>
-              <input type="text" name="question-1-option-3" placeholder="Option 3">
-              <input type="radio" name="question-1-answer-3">
+              <input type="text" name="question-1-option-3" placeholder="Option 3" required>
+              <input type="radio" name="question-1-answer" value="option-3" required>
             </div>
             <div>
-              <input type="text" name="question-1-option-4" placeholder="Option 4">
-              <input type="radio" name="question-1-answer-4">
+              <input type="text" name="question-1-option-4" placeholder="Option 4" required>
+              <input type="radio" name="question-1-answer" value="option-4" required>
             </div>
             <div>
-              <input type="text" name="question-1-option-5" placeholder="Option 5">
-              <input type="radio" name="question-1-answer-5">
+              <input type="text" name="question-1-option-5" placeholder="Option 5" required>
+              <input type="radio" name="question-1-answer" value="option-5" required>
             </div>
           </div>
           <div id="more-questions-button">

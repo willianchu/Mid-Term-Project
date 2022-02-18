@@ -205,7 +205,6 @@ app.post("/create", (req, res) => {
   let questions = {};
   console.log(req.body);
   for (const key in req.body) {
-    console.log(key);
     if (key === 'quiz-title') {
       quizTitle = req.body[key];
     } else if (key.startsWith("question")) {
@@ -220,7 +219,7 @@ app.post("/create", (req, res) => {
       } else if (keyInfo[2] === 'option') {
         questions[questionKey]['options'].push(req.body[key]);
       } else if (keyInfo[2] === 'answer') {
-        questions[questionKey]['answer'] = Number(keyInfo[3]);
+        questions[questionKey]['answer'] = Number(req.body[key].split('-')[1]) - 1;
       }
     } else if (key === 'unlisted_checkbox' && req.body[key] === 'on') {
       isUnlisted = true;

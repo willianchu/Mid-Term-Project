@@ -65,11 +65,11 @@ $(document).ready(function() {
 
     const qb = document.createElement("div");
     $(qb).addClass("question-block");
-    $(qb).append(`<input type="text" name="question-${questionNumber}-title" placeholder="Question ${questionNumber}"><br>`);
+    $(qb).append(`<input type="text" name="question-${questionNumber}-title" placeholder="Question ${questionNumber}" required><br>`);
     for (let i = 1; i <= 5; i ++) {
       const op = document.createElement("div");
       $(op).append(`<input type="text" name="question-${questionNumber}-option-${i}" placeholder="Option ${i}">
-      <input type="radio" id="question-${questionNumber}-answer-${i}">`);
+      <input type="radio" name="question-${questionNumber}-answer" value="option-${i}" required>`);
       $(qb).append(op);
     }
     $(qb).insertBefore('#more-questions-button');
