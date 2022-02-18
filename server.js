@@ -199,6 +199,63 @@ app.get("/tests/:id", (req, res) => {
     });
 });
 
+app.post("/create", (req, res) => {
+  let quizTitle;
+  let isUnlisted = false;
+  let questions = {};
+  console.log(req.body);
+  for (const key in req.body) {
+    console.log(key);
+    if (key === 'quiz-title') {
+      quizTitle = req.body[key];
+    } else if (key.startsWith("question")) {
+      const keyInfo = key.split('-');
+      const questionKey = keyInfo[1];
+      if (keyInfo[2] === 'title') {
+        questions[questionKey] = {
+          'title': req.body[key],
+          'options': [],
+          'answer': '',
+        };
+      } else if (keyInfo[2] === 'option') {
+        questions[questionKey]['options'].push(req.body[key]);
+      } else if (keyInfo[2] === 'answer') {
+        questions[questionKey]['answer'] = Number(keyInfo[3]);
+      }
+    } else if (key === 'unlisted_checkbox' && req.body[key] === 'on') {
+      isUnlisted = true;
+    }
+  }
+  const userId = req.session.user_id;
+  console.log('Quiz Title:', quizTitle);
+  console.log('Quiz Unlisted:', isUnlisted);
+  console.log('Questions:', questions);
+  const quiz = {
+    'title': quizTitle,
+    'owner_id': userId,
+    'is_unlisted': isUnlisted
+  }
+  database.insertQuiz(quiz).then((newQuiz) => {
+    const quizId = Number(newQuiz[0].id);
+    for (const questionKey in questions) {
+      database.insertQuestion({
+        'question': Number(questionKey),
+        'quiz_id': quizId
+      }).then((newQuestion) => {
+        const questionId = Number(newQuestion[0].id);
+        for (let opInd = 0; opInd < questions[questionKey]['options'].length; opInd ++) {
+          database.insertAlternative({
+            'question_id': questionId,
+            'alternative': questions[questionKey]['options'][opInd],
+            'is_correct': (opInd === questions[questionKey]['answer'])
+          });
+        }
+      });
+    }
+  });
+  res.redirect('/');
+});
+
 
 
 app.listen(PORT, () => {
