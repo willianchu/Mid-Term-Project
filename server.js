@@ -131,7 +131,7 @@ app.post("/quizzes/:id", (req, res) => {
 
       database.insertAnswer(answers);
     }
-    res.redirect(`/results/${testId}`);
+    res.redirect(`/tests/${testId}`);
   })
   .catch((err) => {
     res.status(500).json({ error: err.message });
@@ -238,7 +238,7 @@ app.post("/create", (req, res) => {
     const quizId = Number(newQuiz[0].id);
     for (const questionKey in questions) {
       database.insertQuestion({
-        'question': Number(questionKey),
+        'question': questions[questionKey]['title'],
         'quiz_id': quizId
       }).then((newQuestion) => {
         const questionId = Number(newQuestion[0].id);
