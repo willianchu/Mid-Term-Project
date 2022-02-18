@@ -137,22 +137,25 @@ app.get("/login/:id", (req, res) => {
 });
 
 app.get("/tests/:id", (req, res) => {
-  const loggedInUser = 6;
   database.getTestsByTestId(req.params.id)
     .then((data) => { // retrieve test data
       const test = data;
+      const userId = test.user_id;
       Promise.all([ // get Stats
         database.getQuizByQuizId(test.quiz_id),// get quiz data
         database.quizAverage(test.quiz_id), //
         database.getQuizScore(test.quiz_id),// get quiz score of all users
-        database.getUserScore(loggedInUser, test.quiz_id) // get user score
+        database.getUserScore(test.user_id, test.quiz_id), // get user score
+        database.getQuizCorrectAlternatives(test.quiz_id) // get correct alternatives
       ])
         .then((data) => {
           const quizAverage = data[0];
           const quizScore = data[1];
           const userScore = data[2];
           const quiz = data[3];
-          const templateVars = {quizAverage, quizScore, userScore, quiz};
+          const correctAlternatives = data[4];
+          const templateVars = {quizAverage, quizScore, userScore, quiz, correctAlternatives, userId};
+          console.log(correctAlternatives);
           res.render("tests", templateVars);
         })
         .catch((err) => {

@@ -38,14 +38,12 @@
 		<p><%=quizAverage[0].description%>. (Created by <%=quizAverage[0].name%>)</p>
 		
 		<hr>
-		<% if(quiz[0].score = 0){ %>
+		<% if(quiz[0].score === 0){ %> <!-- 1 if then-->
 			<p><a class="quiz-link" href="/quizzes/<%= quizAverage['id'] %>">Start Quiz</a</p>
-		<% } else {%>
-			<p>You got <%=quiz[0].score%> out of <%=quiz[0].questions.length%> correct.</p>
-		<button type="button" class="collapsible">Your Results</button>
-		<p>You got <%=Math.round(quiz[0].score,2)%>%! The average of this quiz is <%=Math.round(quizScore[0].average_result,2)%>%.</p>
-		<p>You <%=quiz[0].result%>, the minimum of correct answers is <%=quizAverage[0].cut_note%>%.</p>.
-		<% } %>
+		<% } else {%> <!-- 2 else -->
+			<button type="button" class="collapsible">Your Results</button>
+			<p>You got <%=Math.round(quiz[0].score,2)%>%! The average of this quiz is <%=Math.round(quizScore[0].average_result,2)%>%. You <%=quiz[0].result%> !!, the minimum of correct answers is <%=quizAverage[0].cut_note%>%.</p>.
+		<% } %> <!-- 3 end -->
 
 		<section class="results">
 			<section class="results" id="test-results">
@@ -63,6 +61,36 @@
 						</tr>
 					<% } %>
 				</table>
+		</section>
+
+		<section class="correct">
+			<section class="results" id="test-correct">
+			</section>
+			<button type="button" class="collapsible">Correct answers</button>
+			<section>	
+			<table id="correct-answers">
+					<tr>
+						<th>Question</th>
+						<th>Answer</th>
+					</tr>
+					<% let lastQuestion = "none"; let questionCounter = 0; let answerCounter = 0; %>
+					<% for (let row of correctAlternatives) { %>
+						<tr>
+							<% if (lastQuestion !== row['question']) { lastQuestion = row['question']; questionCounter ++; answerCounter = 97 %> 
+								<td><%=questionCounter+"- "+row['question'] %></td>
+							<% } else { %>
+								<td> </td>
+							<% } %> 
+							<% if (row['is_correct'] === true) { %> 
+								<td><h4><%=String.fromCharCode (answerCounter)+") "+row['alternative'] %></h4></td>
+							<% } else { %>
+							<td><h6><%=String.fromCharCode (answerCounter)+") "+ row['alternative'] %></h6></td>
+							<% } %>
+						</tr>
+						<tr><p></p></tr><% answerCounter ++ %>
+					<% } %>
+				</table>
+				</section>
 		</section>
 		
 	
