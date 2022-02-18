@@ -1,15 +1,103 @@
 
-.quiz-content{
-  display: flex;
-  flex-direction: column;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
-
-
-
-.btn-success {
+.quiz-name > nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 4rem;
+  background-color: beige;
+}
+
+#quiz-logo {
+  font-family: 'Patua One', cursive;
+  font-size: 2em;
+  padding-left: 2rem;
+  color:coral;
+  &:link { text-decoration: none; }
+  &:visited { text-decoration: none; }
+  &:hover { text-decoration: none; }
+  &:active { text-decoration: none; }
+}
+
+#quiz-info {
+  color: coral;
+  font-weight: 600;
+  padding-right: 2rem;
+}
+
+
+.quiz-content{
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+border:solid black 5px;
+}
+
+
+.quiz-question{
+background-color: beige;
+display: flex;
+flex-direction: row;
+justify-content: center;
+padding:.5em;
+border-radius: 1em;
+}
+.collapsible-answers {
+  background-color:grey;
+  color: beige;
+  cursor: pointer;
+  padding: 1em;
+  border: 2em solid #777;
+  border-radius: 1em;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+}
+.active, .quiz-answer:hover {
+  background-color: gainsboro;
+}
+.quiz-answer{
   background-color: coral;
+  color: beige;
+  flex-direction: row;
+  justify-content: center;
+  padding: 1em;
+  border-radius: .5em;
+  margin: 1em;
+  display: none;
+}
+.quiz-answer.active{
+  display: flex;
+}
+
+.question-table{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.button{
+  display: flex;
+  justify-content: center;
+
+}
+
+.submit-button {
+  display: flex;
+  align-self: center;
+  background-color: #4CAF50; /* Green */
+  border-radius: .2em;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  font-size:2em;
 }
