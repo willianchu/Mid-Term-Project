@@ -34,40 +34,65 @@
   <%- include('partials/_header') %>
   <main style="margin: 1em;">
     <section id ="question-table">
-      <button type="button" class="collapsible"><%=quiz[0].title%></button>
-      <div class="quiz-content">
+      <div class="quiz-name">
+        <nav>
+          <a id="quiz-logo" href="/"><%=quiz[0].title%></a>
+          <span id="quiz-info">
+            <div class="timer">
+            <div class="time_left_txt">Time Left</div>
+            <div class="timer_sec">15</div>
+        </div></span>
+        </nav></div>
         <form action="/quizzes/<%=quiz[0].id%>" method="POST">
-    <table class="question-1">
+    <table class= "question-table">
       <thead>
         <tr>
-          <th scope="col">Question</th>
-          <th scope="col">Alternative 1</th>
-          <th scope="col">Altternative 2</th>
-          <th scope="col">Altternative 3</th>
-          <th scope="col">Altternative 4</th>
-          <th scope="col">Altternative 5</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody >
       <% for (let question of questions) { %>
         <tr>
-         <td><%=question.question%></td>
+         <td class = "quiz-question">
+          <button type="button" class="collapsible-answers" ><%=question.question%></button></td>
         <% for (let alternative of question.alternatives) {%>
-          <td>
-            <div>
+
+          <td class = "quiz-answer">
               <input type="radio" name="question-<%=question.id%>-answers" id="question-<%=alternative.id%>-answer" value="<%=alternative.id%>" />
               <label for="question-<%=alternative.id%>-answer"><%=alternative.alternative%></label>
-          </div>
           </td>
         <% } %>
           </tr>
           <% } %>
+
       </tbody>
       </table>
-      <button type="submit" >Submit Quiz</button>
+      <div class = "button">
+      <button class="submit-button" type="submit" >Submit Quiz</button>
+      <% if (error !== ""){%>
+        <label class = "error"><%=error%></label>
+      <% } %>
+      </div>
     </form>
   </section>
   </main>
+  <script>
+    var coll = document.querySelectorAll(".collapsible-answers");
+    var i;
+    coll.forEach(function (button) {
+      button.addEventListener("click", function() {
+        let answer = this.parentElement.nextElementSibling
+        myLoop(answer)
+      })
+    })
 
+    let myLoop = function(answer) {
+      setTimeout(function(){
+        if(answer){
+          answer.classList.toggle("active");
+          myLoop(answer.nextElementSibling)
+        }
+      }, 50)
+    }
+    </script>
 </body>
 </html>

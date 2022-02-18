@@ -51,6 +51,7 @@ const alternativesRoutes = require("./routes/alternatives");
 const answersRoutes = require("./routes/answers");
 const questionsRoutes = require("./routes/questions");
 const { render } = require("express/lib/response");
+const questions = require("./routes/questions");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -94,12 +95,13 @@ app.get("/quizzes/:id", (req, res) => {
     const quiz = data[0];
     const questions  = data[1];
     const alternatives = data[2];
+    const error = ""
     for(let question of questions){
       let currentAlternative = alternatives.filter(el =>el.question_id === question.id);
       question["alternatives"] = currentAlternative;
     }
     const userId = req.session.user_id;
-    let templateVars = {quiz, questions, userId};
+    let templateVars = {quiz, questions, userId, error};
     res.render("quizzes", templateVars)
   })
   .catch((err) => {
@@ -108,7 +110,10 @@ app.get("/quizzes/:id", (req, res) => {
 });
 app.post("/quizzes/:id", (req, res) => {
   let testId;
-  database.insertTest({
+ database.getQuestionsByQuizId(req.params.id)
+ .then(questions => {
+   if(questions.length === Object.keys(req.body).length) {
+     database.insertTest({
     'user_id': Number(req.session.user_id),
     'quiz_id': Number(req.params.id),
   })
@@ -122,6 +127,8 @@ app.post("/quizzes/:id", (req, res) => {
         'alternative_id': alternativeId,
         'test_id': testId,
       }
+      console.log(answers)
+
       database.insertAnswer(answers);
     }
     res.redirect(`/results/${testId}`);
@@ -129,6 +136,31 @@ app.post("/quizzes/:id", (req, res) => {
   .catch((err) => {
     res.status(500).json({ error: err.message });
   });
+   }else{
+    Promise.all([
+      database.getQuizByQuizId(req.params.id),
+      database.getQuestionsByQuizId(req.params.id),
+      database.getAllAlternatives(),
+    ])
+    .then((data) => {
+      const quiz = data[0];
+      const questions  = data[1];
+      const alternatives = data[2];
+      const error = "Please answer all questions!"
+      for(let question of questions){
+        let currentAlternative = alternatives.filter(el =>el.question_id === question.id);
+        question["alternatives"] = currentAlternative;
+      }
+      const userId = req.session.user_id;
+      let templateVars = {quiz, questions, userId, error};
+      res.render("quizzes", templateVars)
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+   }
+ })
+
 });
 
 app.get("/login/:id", (req, res) => {
@@ -137,22 +169,25 @@ app.get("/login/:id", (req, res) => {
 });
 
 app.get("/tests/:id", (req, res) => {
-  const loggedInUser = 6;
   database.getTestsByTestId(req.params.id)
     .then((data) => { // retrieve test data
       const test = data;
+      const userId = test.user_id;
       Promise.all([ // get Stats
         database.getQuizByQuizId(test.quiz_id),// get quiz data
         database.quizAverage(test.quiz_id), //
         database.getQuizScore(test.quiz_id),// get quiz score of all users
-        database.getUserScore(loggedInUser, test.quiz_id) // get user score
+        database.getUserScore(test.user_id, test.quiz_id), // get user score
+        database.getQuizCorrectAlternatives(test.quiz_id) // get correct alternatives
       ])
         .then((data) => {
           const quizAverage = data[0];
           const quizScore = data[1];
           const userScore = data[2];
           const quiz = data[3];
-          const templateVars = {quizAverage, quizScore, userScore, quiz};
+          const correctAlternatives = data[4];
+          const templateVars = {quizAverage, quizScore, userScore, quiz, correctAlternatives, userId};
+          console.log(correctAlternatives);
           res.render("tests", templateVars);
         })
         .catch((err) => {

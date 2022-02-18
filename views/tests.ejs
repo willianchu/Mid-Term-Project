@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Quiz App - Home Page</title>
+  <title>Quiz <%=quiz[0].id%></title>
 
   <!-- Meta Information -->
   <meta charset="UTF-8">
@@ -27,42 +27,63 @@
   <link rel="stylesheet" href="/styles/layout.css" type="text/css">
   <link rel="stylesheet" href="/styles/main.css" type="text/css">
   <link rel="stylesheet" href="/styles/header.css" type="text/css">
+  <link rel="stylesheet" href="/styles/quizzes.css" type="text/css">
 
 </head>
 <body>
   <%- include('partials/_header') %>
-  <main>
+	<main style="margin: 1em;">
 	
 	<section class="results">
-		<button type="button" class="collapsible"><%=quizAverage[0].title%></button>
-		<p><%=quizAverage[0].description%>. (Created by <%=quizAverage[0].name%>)</p>
-		
-		<hr>
-		<% if(quiz[0].score = 0){ %>
+		<button type="button" class="collapsible-answers"><%=quizAverage[0].title%></button>
+		<p>&emsp; <%=quizAverage[0].description%>. (Created by <%=quizAverage[0].name%>)</p>
+	
+		<% if(quiz[0].score === 0){ %> <!-- 1 if then-->
 			<p><a class="quiz-link" href="/quizzes/<%= quizAverage['id'] %>">Start Quiz</a</p>
-		<% } else {%>
-			<p>You got <%=quiz[0].score%> out of <%=quiz[0].questions.length%> correct.</p>
-		<button type="button" class="collapsible">Your Results</button>
-		<p>You got <%=Math.round(quiz[0].score,2)%>%! The average of this quiz is <%=Math.round(quizScore[0].average_result,2)%>%.</p>
-		<p>You <%=quiz[0].result%>, the minimum of correct answers is <%=quizAverage[0].cut_note%>%.</p>.
-		<% } %>
-
+		<% } else {%> <!-- 2 else -->
+			<button type="button" class="collapsible-answers">Your Results</button>
+			<a>&emsp; You got <%=Math.round(quiz[0].score,2)%>%! The average of this quiz is <%=Math.round(quizScore[0].average_result,2)%>%. You <%=quiz[0].result%> !!, the minimum of correct answers is <%=quizAverage[0].cut_note%>%.</a>.
+		<% } %> <!-- 3 end -->
 		<section class="results">
 			<section class="results" id="test-results">
 			</section>
-			<button type="button" class="collapsible">Ranking</button>
+			<button type="button" class="collapsible-answers">Ranking</button>
 				<table id="ranking">
 					<tr>
-						<th>name</th>
-						<th>result</th>
+						<th style="text-align:center">name</th>
+						<th style="text-align:center">result</th>
 					</tr>
 					<% for (let user of userScore) { %>
 						<tr>
-							<td><%= user['name'] %></td>
-							<td><%= Math.round(user['users_results'], 2) %></td>
+							<td style="text-align:center"><%= user['name'] %></td>
+							<td style="text-align:center"><%= Math.round(user['users_results'], 2) %></td>
 						</tr>
 					<% } %>
 				</table>
+		</section>
+
+		<section class="correct">
+			<section class="results" id="test-correct">
+			</section>
+			<button type="button" class="collapsible-answers">Correct answers</button>
+			<section>	
+					<% let lastQuestion = "none"; let questionCounter = 0; let answerCounter = 0; %>
+					<% for (let row of correctAlternatives) { %>
+						<tr>
+							<% if (lastQuestion !== row['question']) { lastQuestion = row['question']; questionCounter ++; answerCounter = 97 %> 
+								<td class="quiz-question">
+									<button type="button" class="collapsible-answers"><%=questionCounter+"- "+row['question'] %></button></td>
+							<% } %>
+								
+							<% if (row['is_correct'] === true) { %> 
+								<td class = "quiz-answer"><h4>&emsp; <%=String.fromCharCode (answerCounter)+") "+row['alternative'] %></h4></td>
+							<% } else { %>
+							<td class = "quiz-answer"><h6>&emsp; <%=String.fromCharCode (answerCounter)+") "+ row['alternative'] %></h6></td>
+							<% } %>
+						</tr>
+						<tr><p></p></tr><% answerCounter ++ %>
+					<% } %>
+				</section>
 		</section>
 		
 	
