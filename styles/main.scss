@@ -1,5 +1,5 @@
 main {
-  margin: 2rem 2rem;
+  margin: 2rem 4rem;
 }
 
 #create {
@@ -19,14 +19,14 @@ main {
   justify-content: center;
   align-items: center;
   color: beige;
-  background-color: saddlebrown;
+  background-color: chocolate;
   font-size: 1.2em;
-  border: 0.2em solid saddlebrown;
+  border: 0.2em solid chocolate;
   border-radius: 0.2em;
   padding: 0.4em;
   &:hover {
-    background-color: chocolate;
-    border: 0.2em solid chocolate;
+    background-color: saddlebrown;
+    border: 0.2em solid saddlebrown;
     cursor: pointer;
     transition: 0.5s;
   }
@@ -44,7 +44,7 @@ main {
   padding: 0.5em 0;
 }
 
-.collapsible {
+#show-quizzes, #show-results {
   background-color: #777;
   color: beige;
   cursor: pointer;
@@ -57,7 +57,7 @@ main {
   outline: none;
 }
 
-.active, .collapsible:hover {
+#show-quizzes:hover, #show-results:hover {
   background-color: #555;
 }
 
@@ -78,12 +78,12 @@ th {
 
 #more-questions-button {
   color: beige;
-  background-color: saddlebrown;
-  border: 0.2em solid saddlebrown;
+  background-color: chocolate;
+  border: 0.2em solid chocolate;
   border-radius: 0.2em;
   &:hover {
-    background-color: chocolate;
-    border: 0.2em solid chocolate;
+    background-color: saddlebrown;
+    border: 0.2em solid saddlebrown;
     cursor: pointer;
     transition: 0.5s;
   }

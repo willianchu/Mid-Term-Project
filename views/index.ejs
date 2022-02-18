@@ -37,29 +37,45 @@
         <i class="fa-solid fa-plus"></i>
         <span>Create A New Quiz</span>
       </button>
-      <form id="create-form">
-        <input type="text" id="quiz-title" placeholder="Quiz"><br>
-        <input type="text" id="question1-title" placeholder="Question"><br>
-        <div>
-          <input type="text" id="option1-text" placeholder="Option 1">
-          <input type="radio" id="option1-radio" name="correct-option">
-        </div>
-        <div>
-          <input type="text" id="option2-text" placeholder="Option 2">
-          <input type="radio" id="option2-radio" name="correct-option">
-        </div>
-        <div id="more-questions-button">
-          <span id="more-questions-text">More questions</span>
-          <i class="fa-solid fa-caret-down"></i>
-        </div>
-        <div>
-          <input type="checkbox" id="unlisted-checkbox"><label for="unlisted-checkbox">Make this quiz private</label>
-        </div>
-        <button type="submit">Submit</button>
-      </form>
+      <div class="content">
+        <form id="create-form" action="/create" method="POST">
+          <input type="text" name="quiz-title" placeholder="Quiz Title"><br>
+          <div class="question-block">
+            <input type="text" name="question-1-title" placeholder="Question 1"><br>
+            <div>
+              <input type="text" name="question-1-option-1" placeholder="Option 1">
+              <input type="radio" name="question-1-answer-1">
+            </div>
+            <div>
+              <input type="text" name="question-1-option-2" placeholder="Option 2">
+              <input type="radio" name="question-1-answer-2">
+            </div>
+            <div>
+              <input type="text" name="question-1-option-3" placeholder="Option 3">
+              <input type="radio" name="question-1-answer-3">
+            </div>
+            <div>
+              <input type="text" name="question-1-option-4" placeholder="Option 4">
+              <input type="radio" name="question-1-answer-4">
+            </div>
+            <div>
+              <input type="text" name="question-1-option-5" placeholder="Option 5">
+              <input type="radio" name="question-1-answer-5">
+            </div>
+          </div>
+          <div id="more-questions-button">
+            <span id="more-questions-text">More questions</span>
+            <i class="fa-solid fa-caret-down"></i>
+          </div>
+          <div>
+            <input type="checkbox" name="unlisted-checkbox"><label for="unlisted-checkbox">Make this quiz private</label>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     </section>
     <section id="tables">
-      <button type="button" class="collapsible">Quizzes</button>
+      <button type="button" id="show-quizzes">Quizzes</button>
       <div class="content">
         <table id="quizzes">
           <tr>
@@ -67,17 +83,27 @@
             <th>Owner ID</th>
             <th>Start Quiz</th>
             <th>Share Quiz</th>
+            <th>Action</th>
           <% for (let quiz of quizzes) { %>
-            <tr>
-              <td><%= quiz['title'] %></td>
-              <td><%= quiz['owner_id'] %></td>
-              <td><a class="quiz-link" href="/quizzes/<%= quiz['id'] %>">Start Quiz</a></td>
-              <td><a class="copy-quiz-link">Share Quiz</a></td>
-            </tr>
+            <% if (!quiz['is_unlisted'] || Number(userId) === Number(quiz['owner_id'])) { %>
+              <tr>
+                <td><%= quiz['title'] %></td>
+                <td><%= quiz['owner_id'] %></td>
+                <td><a class="quiz-link" href="/quizzes/<%= quiz['id'] %>">Start Quiz</a></td>
+                <td><a class="copy-quiz-link">Share Quiz</a></td>
+                <td>
+                  <% if (quiz['is_unlisted']) { %>
+                    <a class="quiz-unlist">List</a></td>
+                  <% } else if (Number(userId) === Number(quiz['owner_id'])) { %>
+                    <a class="quiz-unlist">Unlist</a></td>
+                  <% } %>
+                </td>
+              </tr>
+            <% } %>
           <% } %>
         </table>
       </div>
-      <button type="button" class="collapsible">Results</button>
+      <button type="button" id="show-results">Results</button>
       <div class="content">
         <table id="attempts">
           <tr>
