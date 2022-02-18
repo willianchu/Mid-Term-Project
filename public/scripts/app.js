@@ -22,6 +22,7 @@ $(document).ready(function() {
     $(shareQuiz).click(function() {
       const link = $($(shareQuiz).parent().prev().children()[0]).attr('href');
       navigator.clipboard.writeText(`${window.location.host}${link}`);
+      $(shareQuiz).text("Link copied!");
     });
   }
 
@@ -31,6 +32,7 @@ $(document).ready(function() {
     $(shareTest).click(function() {
       const link = $($(shareTest).parent().prev().children()[0]).attr('href');
       navigator.clipboard.writeText(`${window.location.host}${link}`);
+      $(shareTest).text("Link copied!");
     });
   }
 
@@ -68,6 +70,7 @@ $(document).ready(function() {
     $(qb).append(`<input type="text" name="question-${questionNumber}-title" placeholder="Question ${questionNumber}" required><br>`);
     for (let i = 1; i <= 5; i ++) {
       const op = document.createElement("div");
+      $(op).addClass("option-block");
       $(op).append(`<input type="text" name="question-${questionNumber}-option-${i}" placeholder="Option ${i}">
       <input type="radio" name="question-${questionNumber}-answer" value="option-${i}" required>`);
       $(qb).append(op);

@@ -88,3 +88,27 @@ th {
     transition: 0.5s;
   }
 }
+
+.question-block {
+  margin-bottom: 0.6em;
+}
+
+input[type=text] {
+  border: 0.2em solid chocolate;;
+  border-radius: 0.5em;
+}
+
+input[type=radio] {
+  color: chocolate;
+}
+
+.question-block > input {
+  margin-bottom: 0.3em;
+}
+
+.option-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.1em;
+}
