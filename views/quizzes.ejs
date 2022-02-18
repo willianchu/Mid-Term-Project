@@ -68,6 +68,9 @@
       </table>
       <div class = "button">
       <button class="submit-button" type="submit" >Submit Quiz</button>
+      <% if (error !== ""){%>
+        <label class = "error"><%=error%></label>
+      <% } %>
       </div>
     </form>
   </section>

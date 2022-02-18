@@ -88,7 +88,17 @@ border-radius: 1em;
 .button{
   display: flex;
   justify-content: center;
+  flex-direction: column;
 
+}
+
+.error{
+  background-color: beige;
+  color: coral;
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  margin-top: 1em;
 }
 
 .submit-button {
