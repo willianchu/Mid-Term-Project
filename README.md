@@ -26,6 +26,7 @@ The following steps are only for _one_ of the group members to perform.
 7. Run the server: `npm run local`
   - Note: nodemon is used, so you should not have to restart your server
 8. Visit `http://localhost:8080/`
+9. Login using `http://localhost:8080/login/:user_id`
 
 ## Warnings & Tips
 
