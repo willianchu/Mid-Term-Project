@@ -256,7 +256,15 @@ app.post("/create", (req, res) => {
   res.redirect('/');
 });
 
+app.post("/list/:quiz_id", (req, res) => {
+  database.updateQuizIsUnlisted(Number(req.params.quiz_id), false);
+  res.redirect('/');
+})
 
+app.post("/unlist/:quiz_id", (req, res) => {
+  database.updateQuizIsUnlisted(Number(req.params.quiz_id), true);
+  res.redirect('/');
+})
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

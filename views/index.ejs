@@ -93,9 +93,13 @@
                 <td><a class="copy-quiz-link">Share Quiz</a></td>
                 <td>
                   <% if (quiz['is_unlisted']) { %>
-                    <a class="quiz-unlist">List</a></td>
+                    <form action="/list/<%= quiz['id'] %>" method="POST">
+                      <button class="list-button">List</button>
+                    </form>
                   <% } else if (Number(userId) === Number(quiz['owner_id'])) { %>
-                    <a class="quiz-unlist">Unlist</a></td>
+                    <form action="/unlist/<%= quiz['id'] %>" method="POST">
+                      <button class="unlist-button">Unlist</button>
+                    </form>
                   <% } %>
                 </td>
               </tr>
