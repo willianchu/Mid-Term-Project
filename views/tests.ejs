@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Quiz App - Home Page</title>
+  <title>Quiz <%=quiz[0].id%></title>
 
   <!-- Meta Information -->
   <meta charset="UTF-8">
@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="/styles/layout.css" type="text/css">
   <link rel="stylesheet" href="/styles/main.css" type="text/css">
   <link rel="stylesheet" href="/styles/header.css" type="text/css">
+  <link rel="stylesheet" href="/styles/quizzes.css" type="text/css">
 
 </head>
 <body>
@@ -36,15 +37,13 @@
 	<section class="results">
 		<button type="button" class="collapsible"><%=quizAverage[0].title%></button>
 		<p><%=quizAverage[0].description%>. (Created by <%=quizAverage[0].name%>)</p>
-		
-		<hr>
+	
 		<% if(quiz[0].score === 0){ %> <!-- 1 if then-->
 			<p><a class="quiz-link" href="/quizzes/<%= quizAverage['id'] %>">Start Quiz</a</p>
 		<% } else {%> <!-- 2 else -->
 			<button type="button" class="collapsible">Your Results</button>
-			<p>You got <%=Math.round(quiz[0].score,2)%>%! The average of this quiz is <%=Math.round(quizScore[0].average_result,2)%>%. You <%=quiz[0].result%> !!, the minimum of correct answers is <%=quizAverage[0].cut_note%>%.</p>.
+			<a>You got <%=Math.round(quiz[0].score,2)%>%! The average of this quiz is <%=Math.round(quizScore[0].average_result,2)%>%. You <%=quiz[0].result%> !!, the minimum of correct answers is <%=quizAverage[0].cut_note%>%.</a>.
 		<% } %> <!-- 3 end -->
-
 		<section class="results">
 			<section class="results" id="test-results">
 			</section>
@@ -69,10 +68,11 @@
 			<button type="button" class="collapsible">Correct answers</button>
 			<section>	
 			<table id="correct-answers">
+				<thead>
 					<tr>
-						<th>Question</th>
-						<th>Answer</th>
 					</tr>
+				</thead>
+				<tbody>
 					<% let lastQuestion = "none"; let questionCounter = 0; let answerCounter = 0; %>
 					<% for (let row of correctAlternatives) { %>
 						<tr>
@@ -89,6 +89,7 @@
 						</tr>
 						<tr><p></p></tr><% answerCounter ++ %>
 					<% } %>
+					
 				</table>
 				</section>
 		</section>
