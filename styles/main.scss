@@ -112,3 +112,9 @@ input[type=radio] {
   align-items: center;
   margin-bottom: 0.1em;
 }
+
+.copy-quiz-link, .copy-test-link, .test-link, .quiz-link  {
+  cursor: pointer;
+  color: chocolate;
+  text-decoration: underline;
+}
